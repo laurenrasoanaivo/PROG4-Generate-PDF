@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+        <title>Employee Sheet</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/">Home</a>
+                    <a class="nav-item nav-link" href="/employees">Employees List</a>
+                </div>
+            </div>
+        </nav>
+        <h2 class="text-center p-3">Employee Sheet</h2>
+        <div class="card mb-3 mx-auto" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img class="img-fluid rounded-start" th:if="${employeeSheet.photo != null}" th:src="'data:image/png;base64,' + ${employeeSheet.photo}"/>
+                    <span th:unless="${employeeSheet.photo != null}">No photo</span>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Details</h5>
+                        <div class="employee-details">
+                            <strong>Serial Number:</strong> <span th:text="${employeeSheet.serialNumber}"></span>
+                        </div>
+                        <div class="employee-details">
+                            <strong>First Name:</strong> <span th:text="${employeeSheet.firstName}"></span>
+                        </div>
+                        <div class="employee-details">
+                            <strong>Last Name:</strong> <span th:text="${employeeSheet.lastName}"></span>
+                        </div>
+                        <div class="employee-details">
+                            <strong>Birth Date:</strong> <span th:text="${employeeSheet.birthDate}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="/webjars/bootstrap/{version}/js/bootstrap.min.js"></script>
+    </body>
+</html>

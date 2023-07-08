@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset = "ISO-8859-1" />
-    <link href = "css/styles.css" rel = "stylesheet"/>
-    <title>Spring Boot Application</title>
-</head>
-<body>
-<h4>Welcome to Thymeleaf Spring Boot web application</h4>
-</body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+        <title>Home</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/">Home</a>
+                    <a class="nav-item nav-link" href="/employees">Employees List</a>
+                </div>
+            </div>
+        </nav>
+        <h1 class="text-center p-3">Welcome !</h1>
+        <div class="text-center">
+            <a class="link-primary" href="/employees">Employees</a>
+        </div>
+    <script src="/webjars/bootstrap/{version}/js/bootstrap.min.js"></script>
+    </body>
 </html>

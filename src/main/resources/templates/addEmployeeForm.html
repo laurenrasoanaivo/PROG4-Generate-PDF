@@ -1,29 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-         <meta charset="UTF-8">
-         <link href = "css/styles.css" rel = "stylesheet"/>
-         <title>Add new employee</title>
+        <meta charset="UTF-8">
+        <link href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+        <title>Add new employee</title>
     </head>
-    <body>
-        <h1>Add new employee</h1>
-
-        <form method="post" action="/addEmployeeForm">
-            <div>
-                <label for="firstName">FirstName:</label>
-                <input type="text" id="firstName" name="firstName" required>
+    <body class="mx-auto my-auto p-3" style="width: 500px;">
+        <h2 class="text-center p-3">Add new employee</h2>
+        <form method="post" action="/addEmployeeForm" enctype="multipart/form-data">
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" id="serialNumber" name="serialNumber" required>
+                <label for="serialNumber">SerialNumber</label>
             </div>
-            <div>
-                <label for="lastName">LastName:</label>
-                <input type="text" id="lastName" name="lastName" required>
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" id="firstName" name="firstName" required>
+                <label for="firstName">FirstName</label>
             </div>
-            <div>
-                <label for="birthDate">BirthDate:</label>
-                <input type="date" id="birthDate" name="birthDate" required>
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" id="lastName" name="lastName" required>
+                <label for="lastName">LastName</label>
             </div>
-            <div>
-                <button type="submit">Add</button>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="birthDate">BirthDate</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="date" id="birthDate" name="birthDate" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="photo">Photo</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="file" id="photo" name="photo">
+                </div>
+            </div>
+            <div class="row justify-content-around p-3">
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary w-100 p-2">Add</button>
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-secondary w-100 p-2">
+                        <a class="text-light text-decoration-none" href="/employees">Cancel</a>
+                    </button>
+                </div>
             </div>
         </form>
+    <script src="/webjars/bootstrap/{version}/js/bootstrap.min.js"></script>
     </body>
 </html>

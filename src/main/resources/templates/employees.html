@@ -2,23 +2,49 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <link href = "css/styles.css" rel = "stylesheet"/>
+        <link href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
         <title>Employees list</title>
     </head>
-<body>
-    <h1>Employees list</h1>
-    <a href="/addEmployeeForm">Add new employee</a>
-    <table>
-        <tr>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>BirthDate</th>
-        </tr>
-        <tr th:each="employee : ${employees}">
-            <td th:text="${employee.firstName}"></td>
-            <td th:text="${employee.lastName}"></td>
-            <td th:text="${employee.birthDate}"></td>
-        </tr>
-    </table>
-</body>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/">Home</a>
+                    <a class="nav-item nav-link" href="/employees">Employees List</a>
+                </div>
+            </div>
+        </nav>
+        <h2 class="p-3 text-center">Employees list</h2>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">SerialNumber</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">BirthDate</th>
+                    <th scope="col">More</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="employee : ${employees}">
+                    <td scope="row" th:text="${employee.serialNumber}"></td>
+                    <td scope="row" th:text="${employee.firstName}"></td>
+                    <td scope="row" th:text="${employee.lastName}"></td>
+                    <td scope="row" th:text="${employee.birthDate}"></td>
+                    <td scope="row">
+                        <a class="link-info" th:href="@{/employeeSheet/{serialNumber}(serialNumber=${employee.serialNumber})}"
+                        >more</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-secondary mx-2">
+            <a class="text-light text-decoration-none" href="/addEmployeeForm">Add new employee</a>
+        </button>
+    <script src="/webjars/bootstrap/{version}/js/bootstrap.min.js"></script>
+    </body>
 </html>
