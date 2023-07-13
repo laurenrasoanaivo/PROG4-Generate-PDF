@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
         <title>Employee Sheet</title>
     </head>
     <body>
@@ -19,11 +20,11 @@
             </div>
         </nav>
         <h2 class="text-center p-3">Employee Sheet</h2>
-        <div class="card mb-3 mx-auto" style="max-width: 540px;">
+        <div class="shadow-sm card mb-3 mx-auto" style="max-width: 540px;">
             <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-4 bg-dark">
                     <img class="img-fluid rounded-start" th:if="${employeeSheet.photo != null}" th:src="'data:image/png;base64,' + ${employeeSheet.photo}"/>
-                    <span th:unless="${employeeSheet.photo != null}">No photo</span>
+                    <span class="text-white" th:unless="${employeeSheet.photo != null}">No photo</span>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -38,12 +39,12 @@
                             <strong>Last Name:</strong> <span th:text="${employeeSheet.lastName}"></span>
                         </div>
                         <div class="employee-details">
-                            <strong>Birth Date:</strong> <span th:text="${employeeSheet.birthDate}"></span>
+                            <strong>Birthdate:</strong> <span th:text="${employeeSheet.birthdate}"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    <script src="/webjars/bootstrap/{version}/js/bootstrap.min.js"></script>
+    <script src="/webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
     </body>
 </html>

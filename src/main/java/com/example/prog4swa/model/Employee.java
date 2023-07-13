@@ -17,14 +17,14 @@ public class Employee {
     private String serialNumber;
     private String firstName;
     private String lastName;
-    private Date birthDate;
-    @Column(length = 1000000000)
+    private Date birthdate;
+    @Column(length = 10000000)
     private String photo;
 
-    public Employee(String serialNumber, String firstName, String lastName, Date birthDate) {
+    public Employee(String serialNumber, String firstName, String lastName, Date birthdate) {
         this.serialNumber = serialNumber;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthDate = birthDate;
+        this.birthdate = birthdate;
     }
 }

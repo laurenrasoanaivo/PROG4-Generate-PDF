@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
         <title>Employees list</title>
     </head>
     <body>
@@ -22,10 +23,10 @@
         <table class="table">
             <thead class="table-dark">
                 <tr>
-                    <th scope="col">SerialNumber</th>
-                    <th scope="col">FirstName</th>
-                    <th scope="col">LastName</th>
-                    <th scope="col">BirthDate</th>
+                    <th scope="col">Serial Number</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Birthdate</th>
                     <th scope="col">More</th>
                 </tr>
             </thead>
@@ -34,17 +35,17 @@
                     <td scope="row" th:text="${employee.serialNumber}"></td>
                     <td scope="row" th:text="${employee.firstName}"></td>
                     <td scope="row" th:text="${employee.lastName}"></td>
-                    <td scope="row" th:text="${employee.birthDate}"></td>
+                    <td scope="row" th:text="${employee.birthdate}"></td>
                     <td scope="row">
-                        <a class="link-info" th:href="@{/employeeSheet/{serialNumber}(serialNumber=${employee.serialNumber})}"
+                        <a class="link-info" th:href="@{/employees/{serialNumber}(serialNumber=${employee.serialNumber})}"
                         >more</a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button type="button" class="btn btn-secondary mx-2">
-            <a class="text-light text-decoration-none" href="/addEmployeeForm">Add new employee</a>
+        <button type="button" class="btn btn-secondary my-2 mx-2">
+            <a class="text-light text-decoration-none" href="/employees/add">Add employee</a>
         </button>
-    <script src="/webjars/bootstrap/{version}/js/bootstrap.min.js"></script>
+    <script src="/webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
     </body>
 </html>

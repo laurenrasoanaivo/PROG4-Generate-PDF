@@ -2,26 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/styles.css">
         <link href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
         <title>Home</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="/">Home</a>
-                    <a class="nav-item nav-link" href="/employees">Employees List</a>
+        <div id="containers" class="bg-light d-flex flex-column justify-content-center align-items-center vh-100">
+            <div class="shadow-sm w-75 h-75 rounded d-flex flex-column justify-content-center align-items-center" id="welcome">
+                <div class="w-50 w-50 text-center">
+                    <h1 class="text-light p-2">Welcome!</h1>
+                    <p class="text-light p-2">Click the button below to view the list of all employees</p>
+                    <div class="p-2">
+                        <button class="btn btn-success">
+                            <a class="text-decoration-none text-white" href="/employees">Employees</a>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </nav>
-        <h1 class="text-center p-3">Welcome !</h1>
-        <div class="text-center">
-            <a class="link-primary" href="/employees">Employees</a>
         </div>
-    <script src="/webjars/bootstrap/{version}/js/bootstrap.min.js"></script>
+    <script src="/webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
     </body>
 </html>

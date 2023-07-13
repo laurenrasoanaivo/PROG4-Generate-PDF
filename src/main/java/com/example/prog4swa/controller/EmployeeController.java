@@ -28,7 +28,7 @@ public class EmployeeController {
         return modelAndView;
     }
 
-    @GetMapping("/employeeSheet/{serialNumber}")
+    @GetMapping("/employees/{serialNumber}")
     public ModelAndView getEmployeeSheet(@PathVariable String serialNumber) {
         ModelAndView modelAndView = new ModelAndView("employeeSheet");
         try {
@@ -40,15 +40,13 @@ public class EmployeeController {
         return modelAndView;
     }
 
-
-
-    @GetMapping("/addEmployeeForm")
+    @GetMapping("/employees/add")
     public String showAddEmployeeForm() { return "addEmployeeForm"; }
 
-    @PostMapping("/addEmployeeForm")
-    public ModelAndView addEmployee(@RequestParam String serialNumber, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String birthDate, @RequestParam("photo") MultipartFile photoFile) {
+    @PostMapping("/employees/add")
+    public ModelAndView addEmployee(@RequestParam String serialNumber, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String birthdate, @RequestParam("photo") MultipartFile photoFile) {
         ModelAndView modelAndView = new ModelAndView("redirect:/employees");
-        Employee employee = new Employee(serialNumber, firstName, lastName, Date.valueOf(birthDate));
+        Employee employee = new Employee(serialNumber, firstName, lastName, Date.valueOf(birthdate));
         List<Employee> employees = service.getEmployees();
         if (!photoFile.isEmpty()) {
             try {
