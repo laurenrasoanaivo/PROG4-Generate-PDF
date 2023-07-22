@@ -10,14 +10,14 @@
     </head>
     <body class="bg-light">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <img class="navbar-brand" th:src="'data:image/png;base64,' + ${company.logo}" width="30" alt="Company.ico"/>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="/">Home</a>
-                    <a class="nav-item nav-link" href="/employees">Employees List</a>
+                    <a class="nav-item nav-link" href="/">Accueil</a>
+                    <a class="nav-item nav-link" href="/employees">List employees</a>
                 </div>
             </div>
         </nav>
@@ -54,8 +54,19 @@
             <table class="table">
                 <thead class="table-dark">
                 <tr>
-                    <th scope="col">Id</th>
                     <th scope="col" class="col">
+                        <div class="d-flex flex-row">
+                            <span class="me-2">Id</span>
+                            <div class="btn-group">
+                                <a class="link-success" th:href="@{/employees(lastName=${param.lastName}, firstName=${param.firstName}, gender=${param.gender}, position=${param.position}, hireDate=${param.hireDate}, departureDate=${param.departureDate}, sort='id,asc')}">
+                                    <i class="bi bi-caret-up-fill"></i>
+                                </a>
+                                <a class="link-success" th:href="@{/employees(lastName=${param.lastName}, firstName=${param.firstName}, gender=${param.gender}, position=${param.position}, hireDate=${param.hireDate}, departureDate=${param.departureDate}, sort='id,desc')}">
+                                    <i class="bi bi-caret-down-fill"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </th>                    <th scope="col" class="col">
                         <div class="d-flex flex-row">
                             <span class="me-2">Nom</span>
                             <div class="btn-group">
@@ -156,6 +167,40 @@
         <button type="button" class="btn btn-success my-2 mx-2">
             <a class="text-light text-decoration-none" href="/employees/add">Add employee</a>
         </button>
-    <script src="/webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+        <footer class="bg-dark text-white text-center p-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img th:src="'data:image/png;base64,' + ${company.logo}" width="30" alt="Company Logo"/>
+                        <h5>Nom de l'entreprise</h5>
+                        <p th:text="${company.name}"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Description de l'entreprise</h5>
+                        <p th:text="${company.description}"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Slogan</h5>
+                        <p th:text="${company.slogan}"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Adresse</h5>
+                        <p th:text="${company.address}"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Email de contact</h5>
+                        <p th:text="${company.email}"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Telephones</h5>
+                        <p th:text="${company.phoneNumber}"></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="/webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
     </body>
 </html>

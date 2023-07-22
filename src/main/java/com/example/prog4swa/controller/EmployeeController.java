@@ -3,7 +3,9 @@ package com.example.prog4swa.controller;
 import com.example.prog4swa.controller.mapper.EmployeeMapper;
 import com.example.prog4swa.controller.model.AddEmployeeModel;
 import com.example.prog4swa.controller.model.EditEmployeeModel;
+import com.example.prog4swa.model.Company;
 import com.example.prog4swa.model.Employee;
+import com.example.prog4swa.service.CompanyService;
 import com.example.prog4swa.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeController implements WebMvcConfigurer {
     private final EmployeeService service;
+    private final CompanyService companyService;
     private final EmployeeMapper mapper;
 
     @GetMapping("/employees")
@@ -33,8 +36,10 @@ public class EmployeeController implements WebMvcConfigurer {
                                    @RequestParam(name = "departureDate", required = false) String departureDate,
                                    @RequestParam(name = "sort", defaultValue = "") String sort,
                                    Model model) {
+        Company company = companyService.getCompany();
         List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate, departureDate, sort);
         model.addAttribute("employees", employees);
+        model.addAttribute("company", company);
         return "employees";
     }
 
