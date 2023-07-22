@@ -164,9 +164,16 @@
                 </tbody>
             </table>
         </div>
-        <button type="button" class="btn btn-success my-2 mx-2">
-            <a class="text-light text-decoration-none" href="/employees/add">Add employee</a>
-        </button>
+
+        <div class="d-flex justify-content-around m-3">
+            <div>
+                <a class="btn btn-success" href="/employees/add">Add employee</a>
+            </div>
+            <div>
+                <a class="btn btn-success"  th:href="@{/export/csv(lastName=${param.lastName}, firstName=${param.firstName}, gender=${param.gender}, position=${param.position}, hireDate=${param.hireDate}, departureDate=${param.departureDate}, sort=${param.sort})}">Exporter en CSV</a>
+            </div>
+        </div>
+
         <footer class="bg-dark text-white text-center p-4">
             <div class="container">
                 <div class="row">

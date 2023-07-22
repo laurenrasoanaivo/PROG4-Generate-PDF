@@ -7,6 +7,7 @@ import com.example.prog4swa.model.Company;
 import com.example.prog4swa.model.Employee;
 import com.example.prog4swa.service.CompanyService;
 import com.example.prog4swa.service.EmployeeService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -117,6 +121,39 @@ public class EmployeeController implements WebMvcConfigurer {
 
         service.addOrUpdateEmployee(editEmployeePayslip);
         return "redirect:/employees/payslip/"+id;
+    }
+
+    @GetMapping("/export/csv")
+    public StreamingResponseBody exportEmployeesAsCSV(HttpServletResponse response,
+                                                      @RequestParam(name = "firstName", required = false) String firstName,
+                                                      @RequestParam(name = "lastName", required = false) String lastName,
+                                                      @RequestParam(name = "gender", required = false) String gender,
+                                                      @RequestParam(name = "position", required = false) String position,
+                                                      @RequestParam(name = "hireDate", required = false) String hireDate,
+                                                      @RequestParam(name = "departureDate", required = false) String departureDate,
+                                                      @RequestParam(name = "sort", defaultValue = "") String sort) {
+        List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate, departureDate, sort);
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=\"employees.csv\"");
+
+        return outputStream -> {
+            OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
+            writer.write("Id,Nom,Prenom,Genre,Fonction,DateEmbauche,DateDepart\n");
+
+            for (Employee employee : employees) {
+                writer.write(
+                        employee.getId() + "," +
+                                "\"" + employee.getLastName() + "\"," +
+                                "\"" + employee.getFirstName() + "\"," +
+                                employee.getGender() + "," +
+                                "\"" + employee.getPosition() + "\"," +
+                                employee.getHireDate() + "," +
+                                (employee.getDepartureDate() != null ? employee.getDepartureDate() : "") + "\n"
+                );
+            }
+
+            writer.flush();
+        };
     }
 
 }
