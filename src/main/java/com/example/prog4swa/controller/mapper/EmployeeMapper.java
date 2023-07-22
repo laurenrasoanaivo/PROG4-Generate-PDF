@@ -1,0 +1,142 @@
+package com.example.prog4swa.controller.mapper;
+
+import com.example.prog4swa.controller.model.AddEmployeeModel;
+import com.example.prog4swa.controller.model.EditEmployeeModel;
+import com.example.prog4swa.model.Employee;
+import com.example.prog4swa.service.EmployeeService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Base64;
+import java.util.List;
+import java.util.Random;
+
+@Component
+@AllArgsConstructor
+public class EmployeeMapper {
+    public final EmployeeService service;
+
+    public Employee toEntity(AddEmployeeModel addEmployee) {
+        return Employee.builder()
+                .serialNumber(generateSerialNumber(addEmployee.getHireDate()))
+                .firstName(addEmployee.getFirstName().trim())
+                .lastName(addEmployee.getLastName().trim())
+                .birthdate(addEmployee.getBirthdate())
+                .gender(addEmployee.getGender())
+                .phoneNumbers(addEmployee.getAdditionalPhoneNumbers() == null ?
+                        List.of(addEmployee.getPhoneNumber()) :
+                        List.of(addEmployee.getPhoneNumber(),
+                                addEmployee.getAdditionalPhoneNumbers()
+                        ))
+                .address(addEmployee.getAddress().trim())
+                .emails(List.of(addEmployee.getPersonalEmail().trim(), addEmployee.getProfessionalEmail().trim()))
+                .cinNumber(addEmployee.getCinNumber())
+                .cinIssuanceDate(addEmployee.getCinIssuanceDate())
+                .cinIssuancePlace(addEmployee.getCinIssuancePlace().trim())
+                .position(addEmployee.getPosition().trim())
+                .dependentChildren(addEmployee.getDependentChildren())
+                .hireDate(addEmployee.getHireDate())
+                .departureDate(addEmployee.getDepartureDate())
+                .salary(addEmployee.getSalary())
+                .benefits(addEmployee.getBenefits())
+                .allowances(addEmployee.getAllowances())
+                .socialSecurityContributions(addEmployee.getSocialSecurityContributions())
+                .taxableIncome(addEmployee.getTaxableIncome())
+                .taxRate(addEmployee.getTaxRate())
+                .cnaps(addEmployee.getCnaps())
+                .photo(addEmployee.getPhoto() != null ? convertToBase64Photo(addEmployee.getPhoto()) : null)
+                .build();
+    }
+
+    public Employee toEntity(EditEmployeeModel editEmployee) {
+        return Employee.builder()
+                .id(editEmployee.getId())
+                .serialNumber(editEmployee.getSerialNumber())
+                .firstName(editEmployee.getFirstName().trim())
+                .lastName(editEmployee.getLastName().trim())
+                .birthdate(editEmployee.getBirthdate())
+                .gender(editEmployee.getGender())
+                .phoneNumbers(editEmployee.getAdditionalPhoneNumbers() == null ?
+                        List.of(editEmployee.getPhoneNumber()) :
+                        List.of(editEmployee.getPhoneNumber(),
+                                editEmployee.getAdditionalPhoneNumbers()
+                        ))
+                .address(editEmployee.getAddress().trim())
+                .emails(List.of(editEmployee.getPersonalEmail().trim(), editEmployee.getProfessionalEmail().trim()))
+                .cinNumber(editEmployee.getCinNumber())
+                .cinIssuanceDate(editEmployee.getCinIssuanceDate())
+                .cinIssuancePlace(editEmployee.getCinIssuancePlace().trim())
+                .position(editEmployee.getPosition().trim())
+                .dependentChildren(editEmployee.getDependentChildren())
+                .hireDate(editEmployee.getHireDate())
+                .departureDate(editEmployee.getDepartureDate())
+                .salary(editEmployee.getSalary())
+                .benefits(editEmployee.getBenefits())
+                .allowances(editEmployee.getAllowances())
+                .socialSecurityContributions(editEmployee.getSocialSecurityContributions())
+                .taxableIncome(editEmployee.getTaxableIncome())
+                .taxRate(editEmployee.getTaxRate())
+                .netIncome(editEmployee.getNetIncome())
+                .cnaps(editEmployee.getCnaps())
+                .photo(editEmployee.getPhoto())
+                .build();
+    }
+
+    public EditEmployeeModel toEditEmployeeModel(Employee employee) {
+        return EditEmployeeModel.builder()
+                .id(employee.getId())
+                .serialNumber(employee.getSerialNumber())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .birthdate(employee.getBirthdate())
+                .gender(employee.getGender())
+                .phoneNumber(employee.getPhoneNumbers().get(0))
+                .additionalPhoneNumbers(employee.getPhoneNumbers().get(1))
+                .address(employee.getAddress())
+                .personalEmail(employee.getEmails().get(0))
+                .professionalEmail(employee.getEmails().get(1))
+                .cinNumber(employee.getCinNumber())
+                .cinIssuanceDate(employee.getCinIssuanceDate())
+                .cinIssuancePlace(employee.getCinIssuancePlace())
+                .position(employee.getPosition().trim())
+                .dependentChildren(employee.getDependentChildren())
+                .hireDate(employee.getHireDate())
+                .departureDate(employee.getDepartureDate())
+                .salary(employee.getSalary())
+                .benefits(employee.getBenefits())
+                .allowances(employee.getAllowances())
+                .socialSecurityContributions(employee.getSocialSecurityContributions())
+                .taxableIncome(employee.getTaxableIncome())
+                .taxRate(employee.getTaxRate())
+                .netIncome(employee.getNetIncome())
+                .cnaps(employee.getCnaps())
+                .photo(employee.getPhoto())
+                .build();
+    }
+
+    public String convertToBase64Photo(MultipartFile photoFile) {
+        try {
+            byte[] photoBytes = photoFile.getBytes();
+            return Base64.getEncoder().encodeToString(photoBytes);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public String generateSerialNumber(LocalDate hireDate) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(90000) + 10000; //10000 - 99999
+        String serialNumber = "EMP-" + hireDate.toString() + "-" + randomNumber;
+
+        while (service.isSerialNumberExists(serialNumber)) {
+            randomNumber = random.nextInt(90000) + 10000;
+            serialNumber = "EMP-" + hireDate.toString() + "-" + randomNumber;
+        }
+
+        return serialNumber;
+    }
+
+}
