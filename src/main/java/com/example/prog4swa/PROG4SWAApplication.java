@@ -1,6 +1,8 @@
 package com.example.prog4swa;
 
+import com.example.prog4swa.controller.security.SessionFilter;
 import jakarta.servlet.MultipartConfigElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
@@ -8,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.unit.DataSize;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -16,6 +19,15 @@ import org.springframework.web.util.UrlPathHelper;
 @SpringBootApplication
 @Configuration
 public class PROG4SWAApplication implements WebMvcConfigurer{
+
+	@Autowired
+	private SessionFilter sessionFilter;
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(sessionFilter).addPathPatterns("/**");
+	}
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/webjars/**")
