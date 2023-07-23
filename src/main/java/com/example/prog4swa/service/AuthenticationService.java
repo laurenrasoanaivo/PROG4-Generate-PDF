@@ -67,4 +67,8 @@ public class AuthenticationService {
         cookie.setPath("/");
         response.addCookie(cookie);
     }
+
+    public void deleteUserSession(UserSession userSession){
+        userSessionRepository.delete(userSession);
+    }
 }

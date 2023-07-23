@@ -6,13 +6,8 @@ import com.example.prog4swa.model.Employee;
 import com.example.prog4swa.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Base64;
 import java.util.List;
-import java.util.Random;
 
 @Component
 @AllArgsConstructor
@@ -21,7 +16,7 @@ public class EmployeeMapper {
 
     public Employee toEntity(AddEmployeeModel addEmployee) {
         return Employee.builder()
-                .serialNumber(generateSerialNumber(addEmployee.getHireDate()))
+                .serialNumber(service.generateSerialNumber(addEmployee.getHireDate()))
                 .firstName(addEmployee.getFirstName().trim())
                 .lastName(addEmployee.getLastName().trim())
                 .birthdate(addEmployee.getBirthdate())
@@ -47,7 +42,7 @@ public class EmployeeMapper {
                 .taxableIncome(addEmployee.getTaxableIncome())
                 .taxRate(addEmployee.getTaxRate())
                 .cnaps(addEmployee.getCnaps())
-                .photo(addEmployee.getPhoto() != null ? convertToBase64Photo(addEmployee.getPhoto()) : null)
+                .photo(addEmployee.getPhoto() != null ? service.convertToBase64Photo(addEmployee.getPhoto()) : null)
                 .build();
     }
 
@@ -94,7 +89,7 @@ public class EmployeeMapper {
                 .birthdate(employee.getBirthdate())
                 .gender(employee.getGender())
                 .phoneNumber(employee.getPhoneNumbers().get(0))
-                .additionalPhoneNumbers(employee.getPhoneNumbers().get(1))
+                .additionalPhoneNumbers(employee.getPhoneNumbers().size()>1 ? employee.getPhoneNumbers().get(1) : null)
                 .address(employee.getAddress())
                 .personalEmail(employee.getEmails().get(0))
                 .professionalEmail(employee.getEmails().get(1))
@@ -115,28 +110,6 @@ public class EmployeeMapper {
                 .cnaps(employee.getCnaps())
                 .photo(employee.getPhoto())
                 .build();
-    }
-
-    public String convertToBase64Photo(MultipartFile photoFile) {
-        try {
-            byte[] photoBytes = photoFile.getBytes();
-            return Base64.getEncoder().encodeToString(photoBytes);
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    public String generateSerialNumber(LocalDate hireDate) {
-        Random random = new Random();
-        int randomNumber = random.nextInt(90000) + 10000; //10000 - 99999
-        String serialNumber = "EMP-" + hireDate.toString() + "-" + randomNumber;
-
-        while (service.isSerialNumberExists(serialNumber)) {
-            randomNumber = random.nextInt(90000) + 10000;
-            serialNumber = "EMP-" + hireDate.toString() + "-" + randomNumber;
-        }
-
-        return serialNumber;
     }
 
 }

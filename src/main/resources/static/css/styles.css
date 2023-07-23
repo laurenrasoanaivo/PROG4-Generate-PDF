@@ -1,17 +1,8 @@
-#containers{
-    min-height: 100vh;
-}
-
-#welcome{
-    background-image: url("/images/bg.jpg");
-    background-size: cover;
-    background-position: center;
-}
 
 .payslip {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

@@ -26,7 +26,7 @@ public class PhoneNumberValidator implements ConstraintValidator<ValidPhoneNumbe
 
     @Override
     public boolean isValid(String phoneNumber, ConstraintValidatorContext context) {
-        if (REQUIRED==false && phoneNumber == null) {
+        if (!REQUIRED && phoneNumber == null) {
             return true;
         }
         Optional<List<Employee>> employees = repository.findByPhoneNumber(phoneNumber);

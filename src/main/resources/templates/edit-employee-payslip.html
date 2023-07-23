@@ -1,129 +1,293 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="ISO-8859-1">
-  <link rel="stylesheet" href="css/styles.css">
-  <link href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
-  <title>Edit Employee Payslip</title>
-</head>
-<body>
-<div class="bg-white">
-  <div class="shadow-m w-50 rounded-3 p-4 border mx-auto">
-    <h2 class="text-center pb-3">Edit Employee</h2>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/styles.css" />
+  <link
+          href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css"
+          rel="stylesheet"
+  />
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+  <link rel="icon" type="image/png" href="images/icon.png">
+    <title>Edit Employee Payslip</title>
+  </head>
+  <body>
+    <div class="bg-white">
+      <div class="shadow-m w-50 rounded-3 p-4 border mx-auto">
+        <h2 class="text-center pb-3">Edit Employee</h2>
 
-    <form class="mx-2" th:action="@{/employees/payslip/edit/__${id}__}" th:object="${payslip}" enctype="multipart/form-data" method="post">
+        <form
+          class="mx-2"
+          th:action="@{/employees/payslip/edit/__${id}__}"
+          th:object="${payslip}"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          <input type="hidden" name="_method" value="PUT" />
 
-      <input type="hidden" name="_method" value="PATCH">
+          <input
+            type="hidden"
+            name="serialNumber"
+            th:value="${payslip.serialNumber}"
+          />
+          <input
+            type="hidden"
+            name="firstName"
+            th:value="${payslip.firstName}"
+          />
+          <input type="hidden" name="lastName" th:value="${payslip.lastName}" />
+          <input
+            type="hidden"
+            name="birthdate"
+            th:value="${payslip.birthdate}"
+          />
+          <input type="hidden" name="gender" th:value="${payslip.gender}" />
+          <input
+            type="hidden"
+            name="phoneNumber"
+            th:value="${payslip.phoneNumber}"
+          />
+          <input
+            type="hidden"
+            name="additionalPhoneNumbers"
+            th:value="${payslip.additionalPhoneNumbers}"
+          />
+          <input type="hidden" name="address" th:value="${payslip.address}" />
+          <input
+            type="hidden"
+            name="personalEmail"
+            th:value="${payslip.personalEmail}"
+          />
+          <input
+            type="hidden"
+            name="professionalEmail"
+            th:value="${payslip.professionalEmail}"
+          />
+          <input
+            type="hidden"
+            name="cinNumber"
+            th:value="${payslip.cinNumber}"
+          />
+          <input
+            type="hidden"
+            name="cinIssuanceDate"
+            th:value="${payslip.cinIssuanceDate}"
+          />
+          <input
+            type="hidden"
+            name="cinIssuancePlace"
+            th:value="${payslip.cinIssuancePlace}"
+          />
+          <input type="hidden" name="position" th:value="${payslip.position}" />
+          <input
+            type="hidden"
+            name="dependentChildren"
+            th:value="${payslip.dependentChildren}"
+          />
+          <input type="hidden" name="hireDate" th:value="${payslip.hireDate}" />
+          <input
+            type="hidden"
+            name="departureDate"
+            th:value="${payslip.departureDate}"
+          />
+          <input type="hidden" name="cnaps" th:value="${payslip.cnaps}" />
+          <input type="hidden" name="photo" th:value="${payslip.photo}" />
 
-      <input type="hidden" name="serialNumber" th:value="${payslip.serialNumber}">
-      <input type="hidden" name="firstName" th:value="${payslip.firstName}">
-      <input type="hidden" name="lastName" th:value="${payslip.lastName}">
-      <input type="hidden" name="birthdate" th:value="${payslip.birthdate}">
-      <input type="hidden" name="gender" th:value="${payslip.gender}">
-      <input type="hidden" name="phoneNumber" th:value="${payslip.phoneNumber}">
-      <input type="hidden" name="additionalPhoneNumbers" th:value="${payslip.additionalPhoneNumbers}">
-      <input type="hidden" name="address" th:value="${payslip.address}">
-      <input type="hidden" name="personalEmail" th:value="${payslip.personalEmail}">
-      <input type="hidden" name="professionalEmail" th:value="${payslip.professionalEmail}">
-      <input type="hidden" name="cinNumber" th:value="${payslip.cinNumber}">
-      <input type="hidden" name="cinIssuanceDate" th:value="${payslip.cinIssuanceDate}">
-      <input type="hidden" name="cinIssuancePlace" th:value="${payslip.cinIssuancePlace}">
-      <input type="hidden" name="position" th:value="${payslip.position}">
-      <input type="hidden" name="dependentChildren" th:value="${payslip.dependentChildren}">
-      <input type="hidden" name="hireDate" th:value="${payslip.hireDate}">
-      <input type="hidden" name="departureDate" th:value="${payslip.departureDate}">
-      <input type="hidden" name="cnaps" th:value="${payslip.cnaps}">
-      <input type="hidden" name="photo" th:value="${payslip.photo}">
+          <input
+            disabled
+            class="form-control bg-light"
+            type="hidden"
+            th:field="*{id}"
+            id="id"
+            name="id"
+          />
 
-      <input disabled class="form-control bg-light" type="hidden" th:field="*{id}" id="id" name="id">
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="serialNumber"
+              >Numero matricule</label
+            >
+            <div class="col-sm-10">
+              <input
+                disabled
+                class="form-control"
+                type="text"
+                th:field="*{serialNumber}"
+                id="serialNumber"
+                name="serialNumber"
+              />
+            </div>
+          </div>
 
-      <div class="row mb-3 align-items-center">
-        <label class="col-sm-2 col-form-label" for="serialNumber">Numero matricule</label>
-        <div class="col-sm-10">
-          <input disabled class="form-control" type="text" th:field="*{serialNumber}" id="serialNumber" name="serialNumber">
-        </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="salary">Salaire</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="number"
+                th:field="*{salary}"
+                id="salary"
+                name="salary"
+                th:classappend="${#fields.hasErrors('salary')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('salary')}"
+                th:errors="*{salary}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="benefits"
+              >Benefices</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="number"
+                th:field="*{benefits}"
+                id="benefits"
+                name="benefits"
+                th:classappend="${#fields.hasErrors('benefits')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('benefits')}"
+                th:errors="*{benefits}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="allowances"
+              >Indemnites</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="number"
+                th:field="*{allowances}"
+                id="allowances"
+                name="allowances"
+                th:classappend="${#fields.hasErrors('allowances')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('allowances')}"
+                th:errors="*{allowances}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label
+              class="col-sm-2 col-form-label"
+              for="socialSecurityContributions"
+              >Cotisations de sï¿½curite sociale</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="number"
+                th:field="*{socialSecurityContributions}"
+                id="socialSecurityContributions"
+                name="socialSecurityContributions"
+                th:classappend="${#fields.hasErrors('salary')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('socialSecurityContributions')}"
+                th:errors="*{socialSecurityContributions}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="taxableIncome"
+              >Revenu imposable</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="number"
+                th:field="*{taxableIncome}"
+                id="taxableIncome"
+                name="taxableIncome"
+                th:classappend="${#fields.hasErrors('taxableIncome')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('taxableIncome')}"
+                th:errors="*{taxableIncome}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="taxRate"
+              >Taux d'imposition</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="number"
+                th:field="*{taxRate}"
+                id="taxRate"
+                name="taxRate"
+                th:classappend="${#fields.hasErrors('taxRate')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('taxRate')}"
+                th:errors="*{taxRate}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="netIncome"
+              >Revenu net</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="number"
+                th:field="*{netIncome}"
+                id="netIncome"
+                name="netIncome"
+                th:classappend="${#fields.hasErrors('netIncome')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('netIncome')}"
+                th:errors="*{netIncome}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row justify-content-around p-3">
+            <div class="col-4">
+              <button type="submit" class="btn btn-success w-100 p-2">
+                Modify
+              </button>
+            </div>
+            <div class="col-4">
+              <button type="button" class="btn btn-secondary w-100 p-2">
+                <a class="text-light text-decoration-none" href="/employees"
+                  >Cancel</a
+                >
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-
-      <div class="row mb-3 align-items-center">
-        <label class="col-sm-2 col-form-label" for="salary">Salaire</label>
-        <div class="col-sm-10">
-          <input  class="form-control bg-light" type="number" th:field="*{salary}" id="salary" name="salary"
-                  th:classappend="${#fields.hasErrors('salary')} ? 'is-invalid' : ''">
-          <span class="invalid-feedback" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></span>
-        </div>
-      </div>
-
-      <div class="row mb-3 align-items-center">
-        <label class="col-sm-2 col-form-label" for="benefits">Benefices</label>
-        <div class="col-sm-10">
-          <input  class="form-control bg-light" type="number" th:field="*{benefits}" id="benefits" name="benefits"
-                  th:classappend="${#fields.hasErrors('benefits')} ? 'is-invalid' : ''">
-          <span class="invalid-feedback" th:if="${#fields.hasErrors('benefits')}" th:errors="*{benefits}"></span>
-        </div>
-      </div>
-
-      <div class="row mb-3 align-items-center">
-        <label class="col-sm-2 col-form-label" for="allowances">Indemnites</label>
-        <div class="col-sm-10">
-          <input  class="form-control bg-light" type="number" th:field="*{allowances}" id="allowances" name="allowances"
-                  th:classappend="${#fields.hasErrors('allowances')} ? 'is-invalid' : ''">
-          <span class="invalid-feedback" th:if="${#fields.hasErrors('allowances')}" th:errors="*{allowances}"></span>
-        </div>
-      </div>
-
-      <div class="row mb-3 align-items-center">
-        <label class="col-sm-2 col-form-label" for="socialSecurityContributions">Cotisations de sécurite sociale</label>
-        <div class="col-sm-10">
-          <input  class="form-control bg-light" type="number" th:field="*{socialSecurityContributions}" id="socialSecurityContributions" name="socialSecurityContributions"
-                  th:classappend="${#fields.hasErrors('salary')} ? 'is-invalid' : ''">
-          <span class="invalid-feedback" th:if="${#fields.hasErrors('socialSecurityContributions')}" th:errors="*{socialSecurityContributions}"></span>
-        </div>
-      </div>
-
-      <div class="row mb-3 align-items-center">
-        <label class="col-sm-2 col-form-label" for="taxableIncome">Revenu imposable</label>
-        <div class="col-sm-10">
-          <input  class="form-control bg-light" type="number" th:field="*{taxableIncome}" id="taxableIncome" name="taxableIncome"
-                  th:classappend="${#fields.hasErrors('taxableIncome')} ? 'is-invalid' : ''">
-          <span class="invalid-feedback" th:if="${#fields.hasErrors('taxableIncome')}" th:errors="*{taxableIncome}"></span>
-        </div>
-      </div>
-
-      <div class="row mb-3 align-items-center">
-        <label class="col-sm-2 col-form-label" for="taxRate">Taux d'imposition</label>
-        <div class="col-sm-10">
-          <input  class="form-control bg-light" type="number" th:field="*{taxRate}" id="taxRate" name="taxRate"
-                  th:classappend="${#fields.hasErrors('taxRate')} ? 'is-invalid' : ''">
-          <span class="invalid-feedback" th:if="${#fields.hasErrors('taxRate')}" th:errors="*{taxRate}"></span>
-        </div>
-      </div>
-
-      <div class="row mb-3 align-items-center">
-        <label class="col-sm-2 col-form-label" for="netIncome">Revenu net</label>
-        <div class="col-sm-10">
-          <input  class="form-control bg-light" type="number" th:field="*{netIncome}" id="netIncome" name="netIncome"
-                  th:classappend="${#fields.hasErrors('netIncome')} ? 'is-invalid' : ''">
-          <span class="invalid-feedback" th:if="${#fields.hasErrors('netIncome')}" th:errors="*{netIncome}"></span>
-        </div>
-      </div>
-
-      <div class="row justify-content-around p-3">
-        <div class="col-4">
-          <button type="submit" class="btn btn-success w-100 p-2" >Modify</button>
-        </div>
-        <div class="col-4">
-          <button type="button" class="btn btn-secondary w-100 p-2">
-            <a class="text-light text-decoration-none" href="/employees">Cancel</a>
-          </button>
-        </div>
-      </div>
-
-    </form>
-  </div>
-</div>
-<script src="/webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
-</body>
+    </div>
+    <script src="/webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+  </body>
 </html>

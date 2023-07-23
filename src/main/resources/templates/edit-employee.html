@@ -1,220 +1,492 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
-    <link href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/styles.css" />
+  <link
+          href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css"
+          rel="stylesheet"
+  />
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+  <link rel="icon" type="image/png" href="images/icon.png">
     <title>Edit Employee Form</title>
-</head>
-<body>
-<div class="bg-white">
-    <div class="shadow-m w-50 rounded-3 p-4 border mx-auto">
+  </head>
+  <body>
+    <div class="bg-white">
+      <div class="shadow-m w-50 rounded-3 p-4 border mx-auto">
         <h2 class="text-center pb-3">Edit Employee</h2>
 
-        <form class="mx-2" th:action="@{/employees/edit/__${id}__}" th:object="${editEmployeeModel}" enctype="multipart/form-data" method="post">
+        <form
+          class="mx-2"
+          th:action="@{/employees/edit/__${id}__}"
+          th:object="${editEmployeeModel}"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          <input type="hidden" name="_method" value="PUT" />
 
-            <input type="hidden" name="_method" value="PATCH">
+          <input
+            type="hidden"
+            name="serialNumber"
+            th:value="${editEmployeeModel.serialNumber}"
+          />
+          <input
+            type="hidden"
+            name="salary"
+            th:value="${editEmployeeModel.salary}"
+          />
+          <input
+            type="hidden"
+            name="benefits"
+            th:value="${editEmployeeModel.benefits}"
+          />
+          <input
+            type="hidden"
+            name="allowances"
+            th:value="${editEmployeeModel.allowances}"
+          />
+          <input
+            type="hidden"
+            name="socialSecurityContributions"
+            th:value="${editEmployeeModel.socialSecurityContributions}"
+          />
+          <input
+            type="hidden"
+            name="taxableIncome"
+            th:value="${editEmployeeModel.taxableIncome}"
+          />
+          <input
+            type="hidden"
+            name="taxRate"
+            th:value="${editEmployeeModel.taxRate}"
+          />
+          <input
+            type="hidden"
+            name="netIncome"
+            th:value="${editEmployeeModel.netIncome}"
+          />
+          <input
+            type="hidden"
+            name="photo"
+            th:value="${editEmployeeModel.photo}"
+          />
 
-            <input type="hidden" name="serialNumber" th:value="${editEmployeeModel.serialNumber}">
-            <input type="hidden" name="salary" th:value="${editEmployeeModel.salary}">
-            <input type="hidden" name="benefits" th:value="${editEmployeeModel.benefits}">
-            <input type="hidden" name="allowances" th:value="${editEmployeeModel.allowances}">
-            <input type="hidden" name="socialSecurityContributions" th:value="${editEmployeeModel.socialSecurityContributions}">
-            <input type="hidden" name="taxableIncome" th:value="${editEmployeeModel.taxableIncome}">
-            <input type="hidden" name="taxRate" th:value="${editEmployeeModel.taxRate}">
-            <input type="hidden" name="netIncome" th:value="${editEmployeeModel.netIncome}">
-            <input type="hidden" name="photo" th:value="${editEmployeeModel.photo}">
+          <input
+            disabled
+            class="form-control bg-light"
+            type="hidden"
+            th:field="*{id}"
+            id="id"
+            name="id"
+          />
 
-            <input disabled class="form-control bg-light" type="hidden" th:field="*{id}" id="id" name="id">
-
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="serialNumber">Numero matricule</label>
-                <div class="col-sm-10">
-                    <input disabled class="form-control" type="text" th:field="*{serialNumber}" id="serialNumber" name="serialNumber">
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="serialNumber"
+              >Numero matricule</label
+            >
+            <div class="col-sm-10">
+              <input
+                disabled
+                class="form-control"
+                type="text"
+                th:field="*{serialNumber}"
+                id="serialNumber"
+                name="serialNumber"
+              />
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="lastName">Nom</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="text" th:field="*{lastName}" id="lastName" name="lastName"
-                            th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="lastName">Nom</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{lastName}"
+                id="lastName"
+                name="lastName"
+                th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('lastName')}"
+                th:errors="*{lastName}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="firstName">Prenom</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="text" th:field="*{firstName}" id="firstName" name="firstName"
-                            th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="firstName"
+              >Prenom</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{firstName}"
+                id="firstName"
+                name="firstName"
+                th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('firstName')}"
+                th:errors="*{firstName}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="birthdate">Date de naissance</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="date" th:value="${#temporals.format(editEmployeeModel.birthdate, 'yyyy-MM-dd')}" id="birthdate" name="birthdate"
-                            th:classappend="${#fields.hasErrors('birthdate')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="birthdate"
+              >Date de naissance</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="date"
+                th:value="${#temporals.format(editEmployeeModel.birthdate, 'yyyy-MM-dd')}"
+                id="birthdate"
+                name="birthdate"
+                th:classappend="${#fields.hasErrors('birthdate')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('birthdate')}"
+                th:errors="*{birthdate}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="gender">Genre</label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline" th:each="gen : ${T(com.example.prog4swa.model.Employee.Gender).values()}">
-                        <input class="form-check-input" type="radio" name="gender" id="gender" th:value="${gen}" th:checked="${gen == editEmployeeModel.gender}">
-                        <label class="form-check-label" th:text="${gen}" for="gender"></label>
-                    </div>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="gender">Genre</label>
+            <div class="col-sm-10">
+              <div
+                class="form-check form-check-inline"
+                th:each="gen : ${T(com.example.prog4swa.model.Employee.Gender).values()}"
+              >
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender"
+                  id="gender"
+                  th:value="${gen}"
+                  th:checked="${gen == editEmployeeModel.gender}"
+                />
+                <label
+                  class="form-check-label"
+                  th:text="${gen}"
+                  for="gender"
+                ></label>
+              </div>
             </div>
+          </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="phoneNumber">Telephone 1</label>
-                <div class="col-sm-10">
-                    <div class="input-group mb-2">
-                        <span class="input-group-text">+261</span>
-                        <input class="form-control bg-light" type="text" th:field="*{phoneNumber}" id="phoneNumber" name="phoneNumber"
-                               th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid' : ''">
-                    </div>
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
-                </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="phoneNumber"
+              >Telephone 1</label
+            >
+            <div class="col-sm-10">
+              <div class="input-group mb-2">
+                <span class="input-group-text">+261</span>
+                <input
+                  class="form-control bg-light"
+                  type="text"
+                  th:field="*{phoneNumber}"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid' : ''"
+                />
+              </div>
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('phoneNumber')}"
+                th:errors="*{phoneNumber}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="additionalPhoneNumbers">Telephone 2</label>
-                <div class="col-sm-10">
-                    <div class="input-group mb-2">
-                        <span class="input-group-text">+261</span>
-                        <input class="form-control bg-light" type="text" th:field="*{additionalPhoneNumbers}" id="additionalPhoneNumbers" name="additionalPhoneNumbers"
-                               th:classappend="${#fields.hasErrors('additionalPhoneNumbers')} ? 'is-invalid' : ''">
-                    </div>
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('additionalPhoneNumbers')}" th:errors="*{additionalPhoneNumbers}"></span>
-                </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="additionalPhoneNumbers"
+              >Telephone 2</label
+            >
+            <div class="col-sm-10">
+              <div class="input-group mb-2">
+                <span class="input-group-text">+261</span>
+                <input
+                  class="form-control bg-light"
+                  type="text"
+                  th:field="*{additionalPhoneNumbers}"
+                  id="additionalPhoneNumbers"
+                  name="additionalPhoneNumbers"
+                  th:classappend="${#fields.hasErrors('additionalPhoneNumbers')} ? 'is-invalid' : ''"
+                />
+              </div>
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('additionalPhoneNumbers')}"
+                th:errors="*{additionalPhoneNumbers}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="address">Address</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="text" th:field="*{address}" id="address" name="address"
-                            th:classappend="${#fields.hasErrors('address')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="address">Address</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{address}"
+                id="address"
+                name="address"
+                th:classappend="${#fields.hasErrors('address')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('address')}"
+                th:errors="*{address}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="personalEmail">Email PS</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="email" th:field="*{personalEmail}" id="personalEmail" name="personalEmail"
-                            th:classappend="${#fields.hasErrors('personalEmail')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('personalEmail')}" th:errors="*{personalEmail}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="personalEmail"
+              >Email PS</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="email"
+                th:field="*{personalEmail}"
+                id="personalEmail"
+                name="personalEmail"
+                th:classappend="${#fields.hasErrors('personalEmail')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('personalEmail')}"
+                th:errors="*{personalEmail}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="professionalEmail">Email PRO</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="email" th:field="*{professionalEmail}" id="professionalEmail" name="professionalEmail"
-                            th:classappend="${#fields.hasErrors('professionalEmail')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('professionalEmail')}" th:errors="*{professionalEmail}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="professionalEmail"
+              >Email PRO</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="email"
+                th:field="*{professionalEmail}"
+                id="professionalEmail"
+                name="professionalEmail"
+                th:classappend="${#fields.hasErrors('professionalEmail')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('professionalEmail')}"
+                th:errors="*{professionalEmail}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="cinNumber">Numero CIN</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="text" th:field="*{cinNumber}" id="cinNumber" name="cinNumber"
-                            th:classappend="${#fields.hasErrors('cinNumber')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('cinNumber')}" th:errors="*{cinNumber}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="cinNumber"
+              >Numero CIN</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{cinNumber}"
+                id="cinNumber"
+                name="cinNumber"
+                th:classappend="${#fields.hasErrors('cinNumber')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cinNumber')}"
+                th:errors="*{cinNumber}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="cinIssuanceDate">Date de delivrance</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="date"  th:value="${#temporals.format(editEmployeeModel.cinIssuanceDate, 'yyyy-MM-dd')}" id="cinIssuanceDate" name="cinIssuanceDate"
-                            th:classappend="${#fields.hasErrors('cinIssuanceDate')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('cinIssuanceDate')}" th:errors="*{cinIssuanceDate}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="cinIssuanceDate"
+              >Date de delivrance</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="date"
+                th:value="${#temporals.format(editEmployeeModel.cinIssuanceDate, 'yyyy-MM-dd')}"
+                id="cinIssuanceDate"
+                name="cinIssuanceDate"
+                th:classappend="${#fields.hasErrors('cinIssuanceDate')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cinIssuanceDate')}"
+                th:errors="*{cinIssuanceDate}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="cinIssuancePlace">Lieu de delivrance</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="text" th:field="*{cinIssuancePlace}" id="cinIssuancePlace" name="cinIssuancePlace"
-                            th:classappend="${#fields.hasErrors('cinIssuancePlace')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('cinIssuancePlace')}" th:errors="*{cinIssuancePlace}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="cinIssuancePlace"
+              >Lieu de delivrance</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{cinIssuancePlace}"
+                id="cinIssuancePlace"
+                name="cinIssuancePlace"
+                th:classappend="${#fields.hasErrors('cinIssuancePlace')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cinIssuancePlace')}"
+                th:errors="*{cinIssuancePlace}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="position">Position</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="text" th:field="*{position}" id="position" name="position"
-                            th:classappend="${#fields.hasErrors('position')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="position"
+              >Position</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{position}"
+                id="position"
+                name="position"
+                th:classappend="${#fields.hasErrors('position')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('position')}"
+                th:errors="*{position}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="dependentChildren">Enfants à charge</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="number" th:field="*{dependentChildren}" id="dependentChildren" name="dependentChildren">
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="dependentChildren"
+              >Enfants ï¿½ charge</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="number"
+                th:field="*{dependentChildren}"
+                id="dependentChildren"
+                name="dependentChildren"
+              />
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="hireDate">Date d embauche</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="date"  th:value="${#temporals.format(editEmployeeModel.hireDate, 'yyyy-MM-dd')}" id="hireDate" name="hireDate"
-                            th:classappend="${#fields.hasErrors('hireDate')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('hireDate')}" th:errors="*{hireDate}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="hireDate"
+              >Date d embauche</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="date"
+                th:value="${#temporals.format(editEmployeeModel.hireDate, 'yyyy-MM-dd')}"
+                id="hireDate"
+                name="hireDate"
+                th:classappend="${#fields.hasErrors('hireDate')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('hireDate')}"
+                th:errors="*{hireDate}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="departureDate">Date de depart</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="date"  th:value="${#temporals.format(editEmployeeModel.departureDate, 'yyyy-MM-dd')}" id="departureDate" name="departureDate"
-                            th:classappend="${#fields.hasErrors('departureDate')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('departureDate')}" th:errors="*{departureDate}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="departureDate"
+              >Date de depart</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="date"
+                th:value="${#temporals.format(editEmployeeModel.departureDate, 'yyyy-MM-dd')}"
+                id="departureDate"
+                name="departureDate"
+                th:classappend="${#fields.hasErrors('departureDate')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('departureDate')}"
+                th:errors="*{departureDate}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="cnaps">Numero CNAPS</label>
-                <div class="col-sm-10">
-                    <input  class="form-control bg-light" type="text" th:field="*{cnaps}" id="cnaps" name="cnaps"
-                            th:classappend="${#fields.hasErrors('cnaps')} ? 'is-invalid' : ''">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('cnaps')}" th:errors="*{cnaps}"></span>
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="cnaps"
+              >Numero CNAPS</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{cnaps}"
+                id="cnaps"
+                name="cnaps"
+                th:classappend="${#fields.hasErrors('cnaps')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cnaps')}"
+                th:errors="*{cnaps}"
+              ></span>
             </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-                <label class="col-sm-2 col-form-label" for="photoFile">Photo</label>
-                <div class="col-sm-10">
-                    <input class="form-control bg-light" type="file" id="photoFile" name="photoFile">
-                </div>
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="photoFile">Photo</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="file"
+                id="photoFile"
+                name="photoFile"
+              />
             </div>
+          </div>
 
-            <div class="row justify-content-around p-3">
-                <div class="col-4">
-                    <button type="submit" class="btn btn-success w-100 p-2" >Modify</button>
-                </div>
-                <div class="col-4">
-                    <button type="button" class="btn btn-secondary w-100 p-2">
-                        <a class="text-light text-decoration-none" href="/employees">Cancel</a>
-                    </button>
-                </div>
+          <div class="row justify-content-around p-3">
+            <div class="col-4">
+              <button type="submit" class="btn btn-success w-100 p-2">
+                Modify
+              </button>
             </div>
-
+            <div class="col-4">
+              <button type="button" class="btn btn-secondary w-100 p-2">
+                <a class="text-light text-decoration-none" href="/employees"
+                  >Cancel</a
+                >
+              </button>
+            </div>
+          </div>
         </form>
+      </div>
     </div>
-</div>
-<script src="/webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
-</body>
+    <script src="/webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+  </body>
 </html>

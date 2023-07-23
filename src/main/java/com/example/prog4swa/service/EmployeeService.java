@@ -7,10 +7,14 @@ import jakarta.persistence.Query;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @AllArgsConstructor
@@ -66,8 +70,6 @@ public class EmployeeService {
             String[] sortParams = sort.split(",");
             String sortField = sortParams[0];
             String sortOrder = sortParams[1];
-            //System.out.println("--------------------------------------------------------------------------- sortField: "+sortField+
-            //        "--------------------------------------------------------------------------- sortOrder: "+sortOrder);
             queryString.append(" ORDER BY e.").append(sortField).append(" ").append(sortOrder);
         }
 
@@ -93,6 +95,28 @@ public class EmployeeService {
         }
 
         return query.getResultList();
+    }
+
+    public String convertToBase64Photo(MultipartFile photoFile) {
+        try {
+            byte[] photoBytes = photoFile.getBytes();
+            return Base64.getEncoder().encodeToString(photoBytes);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public String generateSerialNumber(LocalDate hireDate) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(90000) + 10000; //10000 - 99999
+        String serialNumber = "EMP-" + hireDate.toString() + "-" + randomNumber;
+
+        while (isSerialNumberExists(serialNumber)) {
+            randomNumber = random.nextInt(90000) + 10000;
+            serialNumber = "EMP-" + hireDate.toString() + "-" + randomNumber;
+        }
+
+        return serialNumber;
     }
 
 }

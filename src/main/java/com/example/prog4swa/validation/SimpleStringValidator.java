@@ -18,7 +18,7 @@ public class SimpleStringValidator implements ConstraintValidator<ValidSimpleStr
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (REQUIRED==false && value.isBlank()) {
+        if (!REQUIRED && value.isBlank()) {
             return true;
         }
         int length = value.trim().length();

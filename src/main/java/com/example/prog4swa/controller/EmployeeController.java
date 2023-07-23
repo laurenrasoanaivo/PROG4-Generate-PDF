@@ -50,8 +50,10 @@ public class EmployeeController implements WebMvcConfigurer {
     @GetMapping("/employees/{id}")
     public ModelAndView getEmployeeSheet(@PathVariable int id) {
         Employee employee = service.getEmployeeById(id);
+        Company company = companyService.getCompany();
         return new ModelAndView("employee-sheet")
-                .addObject("employeeSheet", employee);
+                .addObject("employeeSheet", employee)
+                .addObject("company", company);
     }
 
     @GetMapping("/employees/add")
@@ -77,9 +79,13 @@ public class EmployeeController implements WebMvcConfigurer {
                 .addObject("editEmployeeModel", mapper.toEditEmployeeModel(existingEmployee));
     }
 
-    @PatchMapping(value = "/employees/edit/{id}", consumes = "multipart/form-data")
+    @PutMapping(value = "/employees/edit/{id}", consumes = "multipart/form-data")
     public String editEmployee(@PathVariable int id, @Valid EditEmployeeModel editEmployeeModel,
-                               BindingResult bindingResult,@RequestParam("photoFile") MultipartFile photoFile) {
+                               BindingResult bindingResult,
+                               @RequestParam("photoFile") MultipartFile photoFile,
+                               Model model) {
+
+        model.addAttribute("employeeId", id);
 
         if (bindingResult.hasErrors()) {
             return "edit-employee";
@@ -88,7 +94,7 @@ public class EmployeeController implements WebMvcConfigurer {
         Employee editEmployee = mapper.toEntity(editEmployeeModel);
 
         if(photoFile != null && !photoFile.isEmpty()){
-            editEmployee.setPhoto(mapper.convertToBase64Photo(photoFile));
+            editEmployee.setPhoto(service.convertToBase64Photo(photoFile));
         }
 
         service.addOrUpdateEmployee(editEmployee);
@@ -98,8 +104,10 @@ public class EmployeeController implements WebMvcConfigurer {
     @GetMapping("/employees/payslip/{id}")
     public ModelAndView getEmployeePayslip(@PathVariable int id) {
         Employee employee = service.getEmployeeById(id);
+        Company company = companyService.getCompany();
         return new ModelAndView("payslip")
-                .addObject("payslip", employee);
+                .addObject("payslip", employee)
+                .addObject("company", company);
     }
 
     @GetMapping("/employees/payslip/edit/{id}")
@@ -109,7 +117,7 @@ public class EmployeeController implements WebMvcConfigurer {
                 .addObject("payslip", mapper.toEditEmployeeModel(employee));
     }
 
-    @PatchMapping(value = "/employees/payslip/edit/{id}", consumes = "multipart/form-data")
+    @PutMapping(value = "/employees/payslip/edit/{id}", consumes = "multipart/form-data")
     public String editEmployeePayslip(@PathVariable int id, @Valid EditEmployeeModel payslip,
                                BindingResult bindingResult) {
 
