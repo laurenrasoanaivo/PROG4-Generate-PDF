@@ -27,7 +27,7 @@ public class AuthenticationService {
             UserSession session = new UserSession();
             session.setUserEntity(userEntity);
             session.setSessionId(UUID.randomUUID().toString());
-            session.setExpirationDate(LocalDateTime.now().plusHours(12)); // Par exemple, définir une durée de vie de 12 heure pour la session
+            session.setExpirationDate(LocalDateTime.now().plusHours(12));
             UserSession userSession = userSessionRepository.save(session);
             Cookie cookie = new Cookie("userSessionId", userSession.getSessionId());
             cookie.setPath("/");

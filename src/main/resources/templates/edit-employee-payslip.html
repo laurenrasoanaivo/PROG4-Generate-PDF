@@ -1,20 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/styles.css" />
-  <link
-          href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css"
-          rel="stylesheet"
-  />
-  <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-  />
-  <link rel="icon" type="image/png" href="images/icon.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      rel="icon"
+      th:href="'data:image/png;base64,' + ${company.logo}"
+      type="image/png"
+    />
     <title>Edit Employee Payslip</title>
   </head>
   <body>
@@ -50,13 +56,8 @@
           <input type="hidden" name="gender" th:value="${payslip.gender}" />
           <input
             type="hidden"
-            name="phoneNumber"
-            th:value="${payslip.phoneNumber}"
-          />
-          <input
-            type="hidden"
-            name="additionalPhoneNumbers"
-            th:value="${payslip.additionalPhoneNumbers}"
+            name="phoneNumbers"
+            th:value="${payslip.phoneNumbers}"
           />
           <input type="hidden" name="address" th:value="${payslip.address}" />
           <input

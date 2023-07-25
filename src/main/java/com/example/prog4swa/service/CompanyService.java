@@ -14,4 +14,8 @@ public class CompanyService {
         return repository.findAll().get(0);
     }
 
+    public void updateCompany(Company editCompany){
+        repository.save(editCompany);
+    }
+
 }

@@ -29,9 +29,10 @@ public class PhoneNumberValidator implements ConstraintValidator<ValidPhoneNumbe
         if (!REQUIRED && phoneNumber == null) {
             return true;
         }
-        Optional<List<Employee>> employees = repository.findByPhoneNumber(phoneNumber);
+        /*Optional<List<Employee>> employees = repository.findByPhoneNumber(phoneNumber);
         return Pattern.matches(PHONE_NUMBER_PATTERN, phoneNumber) &&
-                (employees.isEmpty() || isPhoneNumberUniqueForEmployee(employees.get()));
+                (employees.isEmpty() || isPhoneNumberUniqueForEmployee(employees.get()));*/
+        return false;
     }
 
     private boolean isPhoneNumberUniqueForEmployee(List<Employee> employees) {

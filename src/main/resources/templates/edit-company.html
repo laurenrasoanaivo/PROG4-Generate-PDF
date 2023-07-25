@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      rel="icon"
+      th:href="'data:image/png;base64,' + ${company.logo}"
+      type="image/png"
+    />
+    <title>Edit Company</title>
+  </head>
+  <body>
+    <div class="bg-white">
+      <div class="shadow-m w-50 rounded-3 p-4 border mx-auto">
+        <h2 class="text-center pb-3">Edit Company</h2>
+
+        <form
+          class="mx-2"
+          th:action="@{/company/edit}"
+          th:object="${company}"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          <input type="hidden" name="_method" value="PUT" />
+
+          <input
+            type="hidden"
+            name="id"
+            id="id"
+            th:field="*{id}"
+            th:value="${company.id}"
+          />
+
+          <input
+            type="hidden"
+            name="logo"
+            th:field="*{logo}"
+            th:value="${company.logo}"
+          />
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="name">Nom</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{name}"
+                id="name"
+                name="name"
+                th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('name')}"
+                th:errors="*{name}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="description"
+              >Description</label
+            >
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{Description}"
+                id="Description"
+                name="Description"
+                th:classappend="${#fields.hasErrors('Description')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('Description')}"
+                th:errors="*{Description}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="slogan">Slogan</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{slogan}"
+                id="slogan"
+                name="slogan"
+                th:classappend="${#fields.hasErrors('slogan')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('slogan')}"
+                th:errors="*{slogan}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="phoneNumbers"
+              >Telephones</label
+            >
+            <div class="col-sm-10">
+              <textarea
+                class="form-control bg-light"
+                th:field="*{phoneNumbers}"
+                id="phoneNumbers"
+                rows="3"
+                name="phoneNumbers"
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="address">Address</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{address}"
+                id="address"
+                name="address"
+                th:classappend="${#fields.hasErrors('address')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('address')}"
+                th:errors="*{address}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="email">Email</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="email"
+                th:field="*{email}"
+                id="email"
+                name="email"
+                th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('email')}"
+                th:errors="*{email}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="nif">NIF</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{nif}"
+                id="nif"
+                name="nif"
+                th:classappend="${#fields.hasErrors('nif')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('nif')}"
+                th:errors="*{nif}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="stat">STAT</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{stat}"
+                id="stat"
+                name="stat"
+                th:classappend="${#fields.hasErrors('stat')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('stat')}"
+                th:errors="*{stat}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="rcs">RCS</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="text"
+                th:field="*{rcs}"
+                id="rcs"
+                name="rcs"
+                th:classappend="${#fields.hasErrors('rcs')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('rcs')}"
+                th:errors="*{rcs}"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label class="col-sm-2 col-form-label" for="logoFile">Logo</label>
+            <div class="col-sm-10">
+              <input
+                class="form-control bg-light"
+                type="file"
+                id="logoFile"
+                name="logoFile"
+              />
+            </div>
+          </div>
+
+          <div class="row justify-content-around p-3">
+            <div class="col-4">
+              <button type="submit" class="btn btn-success w-100 p-2">
+                Modify
+              </button>
+            </div>
+            <div class="col-4">
+              <button type="button" class="btn btn-secondary w-100 p-2">
+                <a class="text-light text-decoration-none" href="/employees"
+                  >Cancel</a
+                >
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="/webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

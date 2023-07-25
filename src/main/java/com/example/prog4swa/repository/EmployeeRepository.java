@@ -13,8 +13,8 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Optional<Employee> findBySerialNumber(String serialNumber);
     //@Query("SELECT e.* FROM employee e JOIN employee_phone_numbers epn ON e.id = epn.employee_id WHERE epn.phone_number = :phoneNumber")
-    @Query("SELECT e FROM Employee e WHERE :phoneNumber MEMBER OF e.phoneNumbers")
-    Optional<List<Employee>> findByPhoneNumber(@Param("phoneNumber") String phoneNumber);
+    //@Query("SELECT e FROM Employee e WHERE :phoneNumber MEMBER OF e.phoneNumbers")
+    //Optional<List<Employee>> findByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 
     Optional<Employee> findByCinNumber(String cinNumber);
     Optional<Employee> findByCnaps(String cnaps);

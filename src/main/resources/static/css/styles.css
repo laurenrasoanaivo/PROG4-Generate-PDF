@@ -1,8 +1,29 @@
-
 .payslip {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.payslip-header {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.payslip-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.payslip-details span {
+  font-weight: bold;
+}
+.payslip-summary {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.payslip-summary span {
+  font-weight: bold;
 }

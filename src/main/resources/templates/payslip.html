@@ -1,72 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/styles.css" />
-  <link
-          href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css"
-          rel="stylesheet"
-  />
-  <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-  />
-  <link rel="icon" type="image/png" href="images/icon.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      rel="icon"
+      th:href="'data:image/png;base64,' + ${company.logo}"
+      type="image/png"
+    />
     <title>Employee Payslip</title>
   </head>
   <body class="bg-light">
-
-  <style>
-    .payslip {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-      .payslip-header {
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-      }
-      .payslip-details {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-      }
-      .payslip-details span {
-        font-weight: bold;
-      }
-      .payslip-summary {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 20px;
-      }
-      .payslip-summary span {
-        font-weight: bold;
-      }
-  </style>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
       <img
-              class="navbar-brand"
-              th:src="'data:image/png;base64,' + ${company.logo}"
-              width="30"
-              alt="Company.ico"
+        class="navbar-brand"
+        th:src="'data:image/png;base64,' + ${company.logo}"
+        width="30"
+        alt="Company.ico"
       />
       <span class="navbar-brand" th:text="${company.name}"></span>
       <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarNavAltMarkup"
-              aria-controls="navbarNavAltMarkup"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -95,15 +68,15 @@
         </a>
       </div>
       <div class="payslip-details">
-        <span th:text="${company.nif}">NIF: </span>
+        <span>NIF: <span th:text="${company.nif}"></span></span>
         <span th:text="${payslip.serialNumber}"></span>
       </div>
       <div class="payslip-details">
-        <span th:text="${company.stat}">STAT: </span>
+        <span>STAT: <span th:text="${company.stat}"></span></span>
         <span th:text="${payslip.firstName} + ' ' + ${payslip.lastName}"></span>
       </div>
       <div class="payslip-details">
-        <span th:text="${company.rcs}">RCS: </span>
+        <span>RCS: <span th:text="${company.rcs}"></span></span>
         <span th:text="${payslip.position}"></span>
       </div>
       <table class="table">
@@ -148,47 +121,48 @@
         </tbody>
       </table>
       <div class="payslip-summary">
-        <span>Total Revenu net:</span>
+        <span>Total Revenu net: </span>
         <span th:text="${payslip.netIncome}"></span>
       </div>
     </div>
 
-  <footer class="bg-dark text-white text-center p-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <img
-                  th:src="'data:image/png;base64,' + ${company.logo}"
-                  width="30"
-                  alt="Company Logo"
-          />
-          <h5 class="mt-2" th:text="${company.name}"></h5>
+    <footer class="bg-dark text-white text-center p-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <img
+              th:src="'data:image/png;base64,' + ${company.logo}"
+              width="30"
+              alt="Company Logo"
+            />
+            <h5 class="mt-2" th:text="${company.name}"></h5>
+          </div>
+          <div class="col-md-4">
+            <h5>Description de l'entreprise</h5>
+            <p th:text="${company.description}"></p>
+          </div>
+          <div class="col-md-4">
+            <h5>Slogan</h5>
+            <p th:text="${company.slogan}"></p>
+          </div>
         </div>
-        <div class="col-md-4">
-          <h5>Description de l'entreprise</h5>
-          <p th:text="${company.description}"></p>
-        </div>
-        <div class="col-md-4">
-          <h5>Slogan</h5>
-          <p th:text="${company.slogan}"></p>
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Adresse</h5>
+            <p th:text="${company.address}"></p>
+          </div>
+          <div class="col-md-4">
+            <h5>Email de contact</h5>
+            <p th:text="${company.email}"></p>
+          </div>
+          <div class="col-md-4">
+            <h5>Telephones</h5>
+            <p th:each="number: ${company.phoneNumbers}">
+              <span th:text="${number}"></span>
+            </p>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <h5>Adresse</h5>
-          <p th:text="${company.address}"></p>
-        </div>
-        <div class="col-md-4">
-          <h5>Email de contact</h5>
-          <p th:text="${company.email}"></p>
-        </div>
-        <div class="col-md-4">
-          <h5>Telephones</h5>
-          <p th:text="${company.phoneNumber}"></p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
+    </footer>
   </body>
 </html>

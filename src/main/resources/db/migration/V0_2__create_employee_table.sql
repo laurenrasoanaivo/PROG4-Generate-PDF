@@ -24,14 +24,27 @@ CREATE TABLE employee (
     photo TEXT
 );
 
-CREATE TABLE employee_phone_numbers (
+CREATE TABLE all_phone_numbers (
     employee_id INT,
+    company_id INT,
     phone_numbers VARCHAR(255),
-    UNIQUE (phone_numbers),
-    FOREIGN KEY (employee_id) REFERENCES employee(id)
+    UNIQUE (phone_numbers)
 );
 
-CREATE TABLE employee_emails (
+ALTER TABLE all_phone_numbers
+ADD CONSTRAINT fk_employee_id
+    CHECK ((employee_id IS NULL AND company_id IS NOT NULL) OR (employee_id IS NOT NULL AND company_id IS NULL));
+
+ALTER TABLE all_phone_numbers
+ADD CONSTRAINT fk_employee
+    FOREIGN KEY (employee_id) REFERENCES employee(id);
+
+ALTER TABLE all_phone_numbers
+ADD CONSTRAINT fk_company
+    FOREIGN KEY (company_id) REFERENCES company(id);
+
+
+CREATE TABLE all_emails (
     employee_id INT,
     emails VARCHAR(255),
     UNIQUE (emails),

@@ -25,12 +25,12 @@ public class Employee {
     private Gender gender;
     @ElementCollection
     @Column(unique = true)
-    @CollectionTable(name = "employee_phone_numbers", joinColumns = @JoinColumn(name = "employee_id"))
+    @CollectionTable(name = "all_phone_numbers", joinColumns = @JoinColumn(name = "employee_id"))
     private List<String> phoneNumbers;
     private String address;
     @ElementCollection
     @Column(unique = true)
-    @CollectionTable(name = "employee_emails", joinColumns = @JoinColumn(name = "employee_id"))
+    @CollectionTable(name = "all_emails", joinColumns = @JoinColumn(name = "employee_id"))
     private List<String> emails;
     @Column(unique = true)
     private String cinNumber;
@@ -53,8 +53,8 @@ public class Employee {
     private String photo;
 
     public enum Gender {
-        MALE,
-        FEMALE
+        H,
+        F
     }
 
 }

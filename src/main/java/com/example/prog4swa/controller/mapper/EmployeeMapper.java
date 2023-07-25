@@ -21,11 +21,7 @@ public class EmployeeMapper {
                 .lastName(addEmployee.getLastName().trim())
                 .birthdate(addEmployee.getBirthdate())
                 .gender(addEmployee.getGender())
-                .phoneNumbers(addEmployee.getAdditionalPhoneNumbers() == null ?
-                        List.of(addEmployee.getPhoneNumber()) :
-                        List.of(addEmployee.getPhoneNumber(),
-                                addEmployee.getAdditionalPhoneNumbers()
-                        ))
+                .phoneNumbers(service.formatStringToPhoneNumbers(addEmployee.getPhoneNumbers()))
                 .address(addEmployee.getAddress().trim())
                 .emails(List.of(addEmployee.getPersonalEmail().trim(), addEmployee.getProfessionalEmail().trim()))
                 .cinNumber(addEmployee.getCinNumber())
@@ -54,11 +50,7 @@ public class EmployeeMapper {
                 .lastName(editEmployee.getLastName().trim())
                 .birthdate(editEmployee.getBirthdate())
                 .gender(editEmployee.getGender())
-                .phoneNumbers(editEmployee.getAdditionalPhoneNumbers() == null ?
-                        List.of(editEmployee.getPhoneNumber()) :
-                        List.of(editEmployee.getPhoneNumber(),
-                                editEmployee.getAdditionalPhoneNumbers()
-                        ))
+                .phoneNumbers(service.formatStringToPhoneNumbers(editEmployee.getPhoneNumbers()))
                 .address(editEmployee.getAddress().trim())
                 .emails(List.of(editEmployee.getPersonalEmail().trim(), editEmployee.getProfessionalEmail().trim()))
                 .cinNumber(editEmployee.getCinNumber())
@@ -88,8 +80,7 @@ public class EmployeeMapper {
                 .lastName(employee.getLastName())
                 .birthdate(employee.getBirthdate())
                 .gender(employee.getGender())
-                .phoneNumber(employee.getPhoneNumbers().get(0))
-                .additionalPhoneNumbers(employee.getPhoneNumbers().size()>1 ? employee.getPhoneNumbers().get(1) : null)
+                .phoneNumbers(service.formatPhoneNumbersToString(employee.getPhoneNumbers()))
                 .address(employee.getAddress())
                 .personalEmail(employee.getEmails().get(0))
                 .professionalEmail(employee.getEmails().get(1))

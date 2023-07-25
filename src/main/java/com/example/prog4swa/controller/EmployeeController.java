@@ -31,6 +31,11 @@ public class EmployeeController implements WebMvcConfigurer {
     private final CompanyService companyService;
     private final EmployeeMapper mapper;
 
+    @ModelAttribute("company")
+    public Company sharedCompany() {
+        return companyService.getCompany();
+    }
+
     @GetMapping("/employees")
     public String showEmployeeList(@RequestParam(name = "firstName", required = false) String firstName,
                                    @RequestParam(name = "lastName", required = false) String lastName,
@@ -40,20 +45,16 @@ public class EmployeeController implements WebMvcConfigurer {
                                    @RequestParam(name = "departureDate", required = false) String departureDate,
                                    @RequestParam(name = "sort", defaultValue = "") String sort,
                                    Model model) {
-        Company company = companyService.getCompany();
         List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate, departureDate, sort);
         model.addAttribute("employees", employees);
-        model.addAttribute("company", company);
         return "employees";
     }
 
     @GetMapping("/employees/{id}")
     public ModelAndView getEmployeeSheet(@PathVariable int id) {
         Employee employee = service.getEmployeeById(id);
-        Company company = companyService.getCompany();
         return new ModelAndView("employee-sheet")
-                .addObject("employeeSheet", employee)
-                .addObject("company", company);
+                .addObject("employeeSheet", employee);
     }
 
     @GetMapping("/employees/add")
@@ -64,7 +65,6 @@ public class EmployeeController implements WebMvcConfigurer {
     @PostMapping(value = "/employees/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String addEmployee(@Valid AddEmployeeModel addEmployeeModel,
                               BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return "add-employee";
         }
@@ -104,10 +104,8 @@ public class EmployeeController implements WebMvcConfigurer {
     @GetMapping("/employees/payslip/{id}")
     public ModelAndView getEmployeePayslip(@PathVariable int id) {
         Employee employee = service.getEmployeeById(id);
-        Company company = companyService.getCompany();
         return new ModelAndView("payslip")
-                .addObject("payslip", employee)
-                .addObject("company", company);
+                .addObject("payslip", employee);
     }
 
     @GetMapping("/employees/payslip/edit/{id}")
@@ -118,8 +116,9 @@ public class EmployeeController implements WebMvcConfigurer {
     }
 
     @PutMapping(value = "/employees/payslip/edit/{id}", consumes = "multipart/form-data")
-    public String editEmployeePayslip(@PathVariable int id, @Valid EditEmployeeModel payslip,
-                               BindingResult bindingResult) {
+    public String editEmployeePayslip(@PathVariable int id,
+                                      @Valid EditEmployeeModel payslip,
+                                      BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "edit-employee-payslip";

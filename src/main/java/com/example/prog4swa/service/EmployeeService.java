@@ -11,10 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -119,4 +116,26 @@ public class EmployeeService {
         return serialNumber;
     }
 
+    public String formatPhoneNumbersToString(List<String> phoneNumbers) {
+        if (phoneNumbers == null || phoneNumbers.isEmpty()) {
+            return null;
+        }
+        StringJoiner joiner = new StringJoiner("\n");
+
+        for (String phoneNumber : phoneNumbers) {
+            joiner.add(phoneNumber.trim());
+        }
+        return joiner.toString();
+    }
+
+    public List<String> formatStringToPhoneNumbers(String phoneNumbers) {
+        if (phoneNumbers == null || phoneNumbers.isEmpty()) {
+            return new ArrayList<>();
+        }
+        String[] phoneNumbersArray = phoneNumbers.split("\n");
+        List<String> formattedPhoneNumbers = new ArrayList<>();
+        for (String phoneNumber : phoneNumbersArray) {
+            formattedPhoneNumbers.add(phoneNumber.trim());
+        }
+        return formattedPhoneNumbers;    }
 }

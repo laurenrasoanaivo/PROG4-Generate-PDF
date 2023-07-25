@@ -22,10 +22,7 @@ public class AddEmployeeModel {
     @ValidDate(value = 18, message = "Employee doit avoir plus de 18 ans et moins de 60 ans")
     private LocalDate birthdate;
     private Employee.Gender gender;
-    @ValidPhoneNumber
-    private String phoneNumber;
-    @ValidPhoneNumber(required = false)
-    private String additionalPhoneNumbers;
+    private String phoneNumbers;
     @ValidSimpleString(min = 5)
     private String address;
     @ValidUnique(value = "personalEmail")
