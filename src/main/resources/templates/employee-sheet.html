@@ -57,7 +57,7 @@
       </div>
     </nav>
 
-    <h2 class="text-center p-3">Fiche Employee</h2>
+    <h2 class="text-center p-3">Fiche Employée</h2>
     <div class="shadow-sm card mb-3 mx-auto w-50">
       <div class="row g-0">
         <div class="col-md-3 bg-dark">
@@ -89,7 +89,7 @@
               </div>
             </div>
             <div class="mb-1 d-flex justify-content-between">
-              <strong>Numero Matricule:</strong>
+              <strong>Numéro Matricule:</strong>
               <span th:text="${employeeSheet.serialNumber}"></span>
             </div>
             <div class="mb-1 d-flex justify-content-between">
@@ -97,7 +97,7 @@
               <span class="text-end" th:text="${employeeSheet.lastName}"></span>
             </div>
             <div class="mb-1 d-flex justify-content-between">
-              <strong>Prenom:</strong>
+              <strong>Prénom:</strong>
               <span th:text="${employeeSheet.firstName}"></span>
             </div>
             <div class="mb-1 d-flex justify-content-between">
@@ -109,7 +109,7 @@
               <span th:text="${employeeSheet.gender}"></span>
             </div>
             <div class="mb-1 d-flex justify-content-between">
-              <strong>Telephone:</strong>
+              <strong>Téléphones:</strong>
               <div class="d-flex flex-column">
                 <div
                   th:each="number : ${employeeSheet.phoneNumbers}"
@@ -134,7 +134,7 @@
               class="mb-1 d-flex justify-content-between"
               th:if="${not #lists.isEmpty(employeeSheet.emails)}"
             >
-              <strong>Email Professionel:</strong>
+              <strong>Email Professionnel:</strong>
               <span th:text="${employeeSheet.emails[1]}"></span>
             </div>
             <div class="mb-1 d-flex justify-content-between">
@@ -142,37 +142,37 @@
               <span th:text="${employeeSheet.position}"></span>
             </div>
             <div class="mb-1 d-flex justify-content-between">
-              <strong>Enfant a charge:</strong>
+              <strong>Enfant à charge:</strong>
               <span th:text="${employeeSheet.dependentChildren}"></span>
             </div>
             <div class="mb-1 d-flex justify-content-between">
-              <strong>Date d emboche:</strong>
+              <strong>Date d'embauche:</strong>
               <span th:text="${employeeSheet.hireDate}"></span>
             </div>
             <div
               class="mb-1 d-flex justify-content-between"
               th:if="${employeeSheet.departureDate != null}"
             >
-              <strong>Date de depart:</strong>
+              <strong>Date de départ:</strong>
               <span th:text="${employeeSheet.departureDate}"></span>
             </div>
             <div class="mb-1 d-flex justify-content-between">
-              <strong>CNAPS:</strong>
+              <strong>Numéro CNAPS:</strong>
               <span th:text="${employeeSheet.cnaps}"></span>
             </div>
             <div class="py-1">
               <h4 class="card-title">CIN</h4>
             </div>
             <div class="mb-1 d-flex justify-content-between">
-              <strong>Numero:</strong>
+              <strong>Numéro:</strong>
               <span th:text="${employeeSheet.cinNumber}"></span>
             </div>
             <div class="mb-1 d-flex justify-content-between">
-              <strong>Date de delivrance:</strong>
+              <strong>Date de délivrance:</strong>
               <span th:text="${employeeSheet.cinIssuanceDate}"></span>
             </div>
             <div class="mb-1 d-flex justify-content-between">
-              <strong>Lieu de delivrance:</strong>
+              <strong>Lieu de délivrance:</strong>
               <span th:text="${employeeSheet.cinIssuancePlace}"></span>
             </div>
             <div class="py-3">
@@ -219,7 +219,7 @@
             <p th:text="${company.email}"></p>
           </div>
           <div class="col-md-4">
-            <h5>Telephones</h5>
+            <h5>Téléphones</h5>
             <p th:each="number: ${company.phoneNumbers}">
               <span th:text="${number}"></span>
             </p>

@@ -26,7 +26,7 @@
   <body>
     <div class="bg-white">
       <div class="shadow-m w-50 rounded-3 p-4 border mx-auto">
-        <h2 class="text-center pb-3">Edit Employee</h2>
+        <h2 class="text-center pb-3">Modifier Employée</h2>
 
         <form
           class="mx-2"
@@ -94,7 +94,7 @@
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="serialNumber"
-              >Numero matricule</label
+              >Numéro matricule</label
             >
             <div class="col-sm-10">
               <input
@@ -117,19 +117,13 @@
                 th:field="*{lastName}"
                 id="lastName"
                 name="lastName"
-                th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('lastName')}"
-                th:errors="*{lastName}"
-              ></span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="firstName"
-              >Prenom</label
+              >Prénom</label
             >
             <div class="col-sm-10">
               <input
@@ -138,13 +132,7 @@
                 th:field="*{firstName}"
                 id="firstName"
                 name="firstName"
-                th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('firstName')}"
-                th:errors="*{firstName}"
-              ></span>
             </div>
           </div>
 
@@ -159,13 +147,7 @@
                 th:value="${#temporals.format(editEmployeeModel.birthdate, 'yyyy-MM-dd')}"
                 id="birthdate"
                 name="birthdate"
-                th:classappend="${#fields.hasErrors('birthdate')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('birthdate')}"
-                th:errors="*{birthdate}"
-              ></span>
             </div>
           </div>
 
@@ -195,7 +177,7 @@
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="phoneNumbers"
-              >Telephones</label
+              >Téléphones</label
             >
             <div class="col-sm-10">
               <textarea
@@ -206,11 +188,12 @@
                 name="phoneNumbers"
                 required
               ></textarea>
+              <span class="text-muted">Format: +261 XX XX XXX XX, aller à la ligne pour ajouter d'autre numéro</span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
-            <label class="col-sm-2 col-form-label" for="address">Address</label>
+            <label class="col-sm-2 col-form-label" for="address">Adresse</label>
             <div class="col-sm-10">
               <input
                 class="form-control bg-light"
@@ -218,19 +201,13 @@
                 th:field="*{address}"
                 id="address"
                 name="address"
-                th:classappend="${#fields.hasErrors('address')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('address')}"
-                th:errors="*{address}"
-              ></span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="personalEmail"
-              >Email PS</label
+              >Email Personnel</label
             >
             <div class="col-sm-10">
               <input
@@ -239,19 +216,13 @@
                 th:field="*{personalEmail}"
                 id="personalEmail"
                 name="personalEmail"
-                th:classappend="${#fields.hasErrors('personalEmail')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('personalEmail')}"
-                th:errors="*{personalEmail}"
-              ></span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="professionalEmail"
-              >Email PRO</label
+              >Email Professionnel</label
             >
             <div class="col-sm-10">
               <input
@@ -260,19 +231,13 @@
                 th:field="*{professionalEmail}"
                 id="professionalEmail"
                 name="professionalEmail"
-                th:classappend="${#fields.hasErrors('professionalEmail')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('professionalEmail')}"
-                th:errors="*{professionalEmail}"
-              ></span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="cinNumber"
-              >Numero CIN</label
+              >Numéro CIN</label
             >
             <div class="col-sm-10">
               <input
@@ -281,19 +246,14 @@
                 th:field="*{cinNumber}"
                 id="cinNumber"
                 name="cinNumber"
-                th:classappend="${#fields.hasErrors('cinNumber')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('cinNumber')}"
-                th:errors="*{cinNumber}"
-              ></span>
+              <span class="text-muted">Format: 12 chiffres</span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="cinIssuanceDate"
-              >Date de delivrance</label
+              >Date de délivrance</label
             >
             <div class="col-sm-10">
               <input
@@ -302,19 +262,13 @@
                 th:value="${#temporals.format(editEmployeeModel.cinIssuanceDate, 'yyyy-MM-dd')}"
                 id="cinIssuanceDate"
                 name="cinIssuanceDate"
-                th:classappend="${#fields.hasErrors('cinIssuanceDate')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('cinIssuanceDate')}"
-                th:errors="*{cinIssuanceDate}"
-              ></span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="cinIssuancePlace"
-              >Lieu de delivrance</label
+              >Lieu de délivrance</label
             >
             <div class="col-sm-10">
               <input
@@ -323,19 +277,13 @@
                 th:field="*{cinIssuancePlace}"
                 id="cinIssuancePlace"
                 name="cinIssuancePlace"
-                th:classappend="${#fields.hasErrors('cinIssuancePlace')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('cinIssuancePlace')}"
-                th:errors="*{cinIssuancePlace}"
-              ></span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="position"
-              >Position</label
+              >Fonction</label
             >
             <div class="col-sm-10">
               <input
@@ -344,19 +292,13 @@
                 th:field="*{position}"
                 id="position"
                 name="position"
-                th:classappend="${#fields.hasErrors('position')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('position')}"
-                th:errors="*{position}"
-              ></span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="dependentChildren"
-              >Enfants � charge</label
+              >Enfants à charge</label
             >
             <div class="col-sm-10">
               <input
@@ -371,7 +313,7 @@
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="hireDate"
-              >Date d embauche</label
+              >Date d'embauche</label
             >
             <div class="col-sm-10">
               <input
@@ -380,19 +322,13 @@
                 th:value="${#temporals.format(editEmployeeModel.hireDate, 'yyyy-MM-dd')}"
                 id="hireDate"
                 name="hireDate"
-                th:classappend="${#fields.hasErrors('hireDate')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('hireDate')}"
-                th:errors="*{hireDate}"
-              ></span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="departureDate"
-              >Date de depart</label
+              >Date de départ</label
             >
             <div class="col-sm-10">
               <input
@@ -401,19 +337,13 @@
                 th:value="${#temporals.format(editEmployeeModel.departureDate, 'yyyy-MM-dd')}"
                 id="departureDate"
                 name="departureDate"
-                th:classappend="${#fields.hasErrors('departureDate')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('departureDate')}"
-                th:errors="*{departureDate}"
-              ></span>
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <label class="col-sm-2 col-form-label" for="cnaps"
-              >Numero CNAPS</label
+              >Numéro CNAPS</label
             >
             <div class="col-sm-10">
               <input
@@ -422,13 +352,10 @@
                 th:field="*{cnaps}"
                 id="cnaps"
                 name="cnaps"
-                th:classappend="${#fields.hasErrors('cnaps')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('cnaps')}"
-                th:errors="*{cnaps}"
-              ></span>
+              <span class="text-muted"
+              >Format: CNAPS-XXX-XXXXX</span>
+              >Format: CNAPS-XXX-XXXXX</span>
             </div>
           </div>
 

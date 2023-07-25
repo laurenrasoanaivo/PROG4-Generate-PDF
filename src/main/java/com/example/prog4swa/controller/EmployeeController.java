@@ -8,12 +8,10 @@ import com.example.prog4swa.model.Employee;
 import com.example.prog4swa.service.CompanyService;
 import com.example.prog4swa.service.EmployeeService;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -63,11 +61,7 @@ public class EmployeeController implements WebMvcConfigurer {
     }
 
     @PostMapping(value = "/employees/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String addEmployee(@Valid AddEmployeeModel addEmployeeModel,
-                              BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "add-employee";
-        }
+    public String addEmployee(AddEmployeeModel addEmployeeModel) {
         service.addOrUpdateEmployee(mapper.toEntity(addEmployeeModel));
         return "redirect:/employees";
     }
@@ -80,16 +74,11 @@ public class EmployeeController implements WebMvcConfigurer {
     }
 
     @PutMapping(value = "/employees/edit/{id}", consumes = "multipart/form-data")
-    public String editEmployee(@PathVariable int id, @Valid EditEmployeeModel editEmployeeModel,
-                               BindingResult bindingResult,
+    public String editEmployee(@PathVariable int id, EditEmployeeModel editEmployeeModel,
                                @RequestParam("photoFile") MultipartFile photoFile,
                                Model model) {
 
         model.addAttribute("employeeId", id);
-
-        if (bindingResult.hasErrors()) {
-            return "edit-employee";
-        }
 
         Employee editEmployee = mapper.toEntity(editEmployeeModel);
 
@@ -117,12 +106,7 @@ public class EmployeeController implements WebMvcConfigurer {
 
     @PutMapping(value = "/employees/payslip/edit/{id}", consumes = "multipart/form-data")
     public String editEmployeePayslip(@PathVariable int id,
-                                      @Valid EditEmployeeModel payslip,
-                                      BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            return "edit-employee-payslip";
-        }
+                                      EditEmployeeModel payslip) {
 
         Employee editEmployeePayslip = mapper.toEntity(payslip);
 
