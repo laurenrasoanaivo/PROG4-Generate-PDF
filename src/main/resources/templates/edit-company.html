@@ -18,20 +18,22 @@
     />
     <link
       rel="icon"
-      th:href="'data:image/png;base64,' + ${company.logo}"
+      th:href="'data:image/png;base64,' + ${editCompanyModel.logo}"
       type="image/png"
     />
-    <title>Edit Company</title>
+    <title>Edit editCompanyModel</title>
   </head>
   <body>
     <div class="bg-white">
       <div class="shadow-m w-50 rounded-3 p-4 border mx-auto">
-        <h2 class="text-center pb-3">Modifier les informations de l'entreprise</h2>
+        <h2 class="text-center pb-3">
+          Modifier les informations de l'entreprise
+        </h2>
 
         <form
           class="mx-2"
           th:action="@{/company/edit}"
-          th:object="${company}"
+          th:object="${editCompanyModel}"
           enctype="multipart/form-data"
           method="post"
         >
@@ -42,14 +44,12 @@
             name="id"
             id="id"
             th:field="*{id}"
-            th:value="${company.id}"
           />
 
           <input
             type="hidden"
             name="logo"
-            th:field="*{logo}"
-            th:value="${company.logo}"
+            th:value="${editCompanyModel.logo}"
           />
 
           <div class="row mb-3 align-items-center">
@@ -155,13 +155,7 @@
                 th:field="*{email}"
                 id="email"
                 name="email"
-                th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''"
               />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('email')}"
-                th:errors="*{email}"
-              ></span>
             </div>
           </div>
 
@@ -181,6 +175,10 @@
                 th:if="${#fields.hasErrors('nif')}"
                 th:errors="*{nif}"
               ></span>
+              <span
+                class="text-muted"
+                th:unless="${#fields.hasErrors('nif')}"
+              >Format: 10 chiffres</span>
             </div>
           </div>
 
@@ -200,6 +198,10 @@
                 th:if="${#fields.hasErrors('stat')}"
                 th:errors="*{stat}"
               ></span>
+              <span
+                class="text-muted"
+                th:unless="${#fields.hasErrors('stat')}"
+              >Format: 10 chiffres</span>
             </div>
           </div>
 
@@ -219,6 +221,10 @@
                 th:if="${#fields.hasErrors('rcs')}"
                 th:errors="*{rcs}"
               ></span>
+              <span
+                class="text-muted"
+                th:unless="${#fields.hasErrors('rcs')}"
+              >Format: 5 chiffres</span>
             </div>
           </div>
 

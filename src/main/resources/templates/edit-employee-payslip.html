@@ -21,7 +21,7 @@
       th:href="'data:image/png;base64,' + ${company.logo}"
       type="image/png"
     />
-    <title>Edit Employee Payslip</title>
+    <title>Edit Employee editEmployeeModel</title>
   </head>
   <body>
     <div class="bg-white">
@@ -31,7 +31,7 @@
         <form
           class="mx-2"
           th:action="@{/employees/payslip/edit/__${id}__}"
-          th:object="${payslip}"
+          th:object="${editEmployeeModel}"
           enctype="multipart/form-data"
           method="post"
         >
@@ -40,65 +40,93 @@
           <input
             type="hidden"
             name="serialNumber"
-            th:value="${payslip.serialNumber}"
+            th:value="${editEmployeeModel.serialNumber}"
           />
           <input
             type="hidden"
             name="firstName"
-            th:value="${payslip.firstName}"
+            th:value="${editEmployeeModel.firstName}"
           />
-          <input type="hidden" name="lastName" th:value="${payslip.lastName}" />
+          <input
+            type="hidden"
+            name="lastName"
+            th:value="${editEmployeeModel.lastName}"
+          />
           <input
             type="hidden"
             name="birthdate"
-            th:value="${payslip.birthdate}"
+            th:value="${editEmployeeModel.birthdate}"
           />
-          <input type="hidden" name="gender" th:value="${payslip.gender}" />
+          <input
+            type="hidden"
+            name="gender"
+            th:value="${editEmployeeModel.gender}"
+          />
           <input
             type="hidden"
             name="phoneNumbers"
-            th:value="${payslip.phoneNumbers}"
+            th:value="${editEmployeeModel.phoneNumbers}"
           />
-          <input type="hidden" name="address" th:value="${payslip.address}" />
+          <input
+            type="hidden"
+            name="address"
+            th:value="${editEmployeeModel.address}"
+          />
           <input
             type="hidden"
             name="personalEmail"
-            th:value="${payslip.personalEmail}"
+            th:value="${editEmployeeModel.personalEmail}"
           />
           <input
             type="hidden"
             name="professionalEmail"
-            th:value="${payslip.professionalEmail}"
+            th:value="${editEmployeeModel.professionalEmail}"
           />
           <input
             type="hidden"
             name="cinNumber"
-            th:value="${payslip.cinNumber}"
+            th:value="${editEmployeeModel.cinNumber}"
           />
           <input
             type="hidden"
             name="cinIssuanceDate"
-            th:value="${payslip.cinIssuanceDate}"
+            th:value="${editEmployeeModel.cinIssuanceDate}"
           />
           <input
             type="hidden"
             name="cinIssuancePlace"
-            th:value="${payslip.cinIssuancePlace}"
+            th:value="${editEmployeeModel.cinIssuancePlace}"
           />
-          <input type="hidden" name="position" th:value="${payslip.position}" />
+          <input
+            type="hidden"
+            name="position"
+            th:value="${editEmployeeModel.position}"
+          />
           <input
             type="hidden"
             name="dependentChildren"
-            th:value="${payslip.dependentChildren}"
+            th:value="${editEmployeeModel.dependentChildren}"
           />
-          <input type="hidden" name="hireDate" th:value="${payslip.hireDate}" />
+          <input
+            type="hidden"
+            name="hireDate"
+            th:value="${editEmployeeModel.hireDate}"
+          />
           <input
             type="hidden"
             name="departureDate"
-            th:value="${payslip.departureDate}"
+            th:value="${editEmployeeModel.departureDate}"
           />
-          <input type="hidden" name="cnaps" th:value="${payslip.cnaps}" />
-          <input type="hidden" name="photo" th:value="${payslip.photo}" />
+          <input
+            type="hidden"
+            name="cnaps"
+            th:value="${editEmployeeModel.cnaps}"
+          />
+          <input
+            type="hidden"
+            name="photo"
+            th:value="${editEmployeeModel.photo}"
+          />
 
           <input
             disabled
@@ -134,7 +162,13 @@
                 th:field="*{salary}"
                 id="salary"
                 name="salary"
+                th:classappend="${#fields.hasErrors('salary')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('salary')}"
+                th:errors="*{salary}"
+              ></span>
             </div>
           </div>
 
@@ -149,7 +183,13 @@
                 th:field="*{benefits}"
                 id="benefits"
                 name="benefits"
+                th:classappend="${#fields.hasErrors('benefits')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('benefits')}"
+                th:errors="*{benefits}"
+              ></span>
             </div>
           </div>
 
@@ -164,7 +204,13 @@
                 th:field="*{allowances}"
                 id="allowances"
                 name="allowances"
+                th:classappend="${#fields.hasErrors('allowances')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('allowances')}"
+                th:errors="*{allowances}"
+              ></span>
             </div>
           </div>
 
@@ -181,7 +227,13 @@
                 th:field="*{socialSecurityContributions}"
                 id="socialSecurityContributions"
                 name="socialSecurityContributions"
+                th:classappend="${#fields.hasErrors('socialSecurityContributions')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('socialSecurityContributions')}"
+                th:errors="*{socialSecurityContributions}"
+              ></span>
             </div>
           </div>
 
@@ -196,7 +248,13 @@
                 th:field="*{taxableIncome}"
                 id="taxableIncome"
                 name="taxableIncome"
+                th:classappend="${#fields.hasErrors('taxableIncome')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('taxableIncome')}"
+                th:errors="*{taxableIncome}"
+              ></span>
             </div>
           </div>
 
@@ -211,7 +269,13 @@
                 th:field="*{taxRate}"
                 id="taxRate"
                 name="taxRate"
+                th:classappend="${#fields.hasErrors('taxRate')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('taxRate')}"
+                th:errors="*{taxRate}"
+              ></span>
             </div>
           </div>
 
@@ -226,7 +290,13 @@
                 th:field="*{netIncome}"
                 id="netIncome"
                 name="netIncome"
+                th:classappend="${#fields.hasErrors('netIncome')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('netIncome')}"
+                th:errors="*{netIncome}"
+              ></span>
             </div>
           </div>
 

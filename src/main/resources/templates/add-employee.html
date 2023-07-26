@@ -46,7 +46,13 @@
                 id="lastName"
                 name="lastName"
                 required
+                th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('lastName')}"
+                th:errors="*{lastName}"
+              ></span>
             </div>
           </div>
 
@@ -62,7 +68,13 @@
                 id="firstName"
                 name="firstName"
                 required
+                th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('firstName')}"
+                th:errors="*{firstName}"
+              ></span>
             </div>
           </div>
 
@@ -78,7 +90,13 @@
                 id="birthdate"
                 name="birthdate"
                 required
+                th:classappend="${#fields.hasErrors('birthdate')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('birthdate')}"
+                th:errors="*{birthdate}"
+              ></span>
             </div>
           </div>
 
@@ -119,7 +137,10 @@
                 name="phoneNumbers"
                 required
               ></textarea>
-              <span class="text-muted">Format: +261 XX XX XXX XX, aller à la ligne pour ajouter d'autre numéro</span>
+              <span class="text-muted"
+                >Format: +261 XX XX XXX XX, aller à la ligne pour ajouter
+                d'autre numéro</span
+              >
             </div>
           </div>
 
@@ -133,7 +154,13 @@
                 id="address"
                 name="address"
                 required
+                th:classappend="${#fields.hasErrors('address')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('address')}"
+                th:errors="*{address}"
+              ></span>
             </div>
           </div>
 
@@ -181,7 +208,13 @@
                 id="cinNumber"
                 name="cinNumber"
                 required
+                th:classappend="${#fields.hasErrors('cinNumber')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cinNumber')}"
+                th:errors="*{cinNumber}"
+              ></span>
               <span class="text-muted">Format: 12 chiffres</span>
             </div>
           </div>
@@ -198,7 +231,13 @@
                 id="cinIssuanceDate"
                 name="cinIssuanceDate"
                 required
+                th:classappend="${#fields.hasErrors('cinIssuanceDate')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cinIssuanceDate')}"
+                th:errors="*{cinIssuanceDate}"
+              ></span>
             </div>
           </div>
 
@@ -214,7 +253,13 @@
                 id="cinIssuancePlace"
                 name="cinIssuancePlace"
                 required
+                th:classappend="${#fields.hasErrors('cinIssuancePlace')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cinIssuancePlace')}"
+                th:errors="*{cinIssuancePlace}"
+              ></span>
             </div>
           </div>
 
@@ -230,7 +275,13 @@
                 id="position"
                 name="position"
                 required
+                th:classappend="${#fields.hasErrors('position')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('position')}"
+                th:errors="*{position}"
+              ></span>
             </div>
           </div>
 
@@ -245,6 +296,13 @@
                 th:field="*{dependentChildren}"
                 id="dependentChildren"
                 name="dependentChildren"
+                th:classappend="${#fields.hasErrors('dependentChildren')} ? 'is-invalid' : ''"
+              />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('dependentChildren')}"
+                th:errors="*{dependentChildren}"
+              ></span>
               />
             </div>
           </div>
@@ -261,7 +319,13 @@
                 id="hireDate"
                 name="hireDate"
                 required
+                th:classappend="${#fields.hasErrors('hireDate')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('hireDate')}"
+                th:errors="*{hireDate}"
+              ></span>
             </div>
           </div>
 
@@ -276,7 +340,13 @@
                 th:field="*{departureDate}"
                 id="departureDate"
                 name="departureDate"
+                th:classappend="${#fields.hasErrors('departureDate')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('departureDate')}"
+                th:errors="*{departureDate}"
+              ></span>
             </div>
           </div>
 
@@ -289,7 +359,13 @@
                 th:field="*{salary}"
                 id="salary"
                 name="salary"
+                th:classappend="${#fields.hasErrors('salary')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('salary')}"
+                th:errors="*{salary}"
+              ></span>
             </div>
           </div>
 
@@ -304,7 +380,13 @@
                 th:field="*{benefits}"
                 id="benefits"
                 name="benefits"
+                th:classappend="${#fields.hasErrors('benefits')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('benefits')}"
+                th:errors="*{benefits}"
+              ></span>
             </div>
           </div>
 
@@ -319,6 +401,7 @@
                 th:field="*{allowances}"
                 id="allowances"
                 name="allowances"
+                th:classappend="${#fields.hasErrors('allowances')} ? 'is-invalid' : ''"
               />
               <span
                 class="invalid-feedback"
@@ -341,7 +424,13 @@
                 th:field="*{socialSecurityContributions}"
                 id="socialSecurityContributions"
                 name="socialSecurityContributions"
+                th:classappend="${#fields.hasErrors('socialSecurityContributions')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('socialSecurityContributions')}"
+                th:errors="*{socialSecurityContributions}"
+              ></span>
             </div>
           </div>
 
@@ -356,7 +445,13 @@
                 th:field="*{taxableIncome}"
                 id="taxableIncome"
                 name="taxableIncome"
+                th:classappend="${#fields.hasErrors('taxableIncome')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('taxableIncome')}"
+                th:errors="*{taxableIncome}"
+              ></span>
             </div>
           </div>
 
@@ -371,7 +466,13 @@
                 th:field="*{taxRate}"
                 id="taxRate"
                 name="taxRate"
+                th:classappend="${#fields.hasErrors('taxRate')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('taxRate')}"
+                th:errors="*{taxRate}"
+              ></span>
             </div>
           </div>
 
@@ -386,7 +487,13 @@
                 th:field="*{netIncome}"
                 id="netIncome"
                 name="netIncome"
+                th:classappend="${#fields.hasErrors('netIncome')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('netIncome')}"
+                th:errors="*{netIncome}"
+              ></span>
             </div>
           </div>
 
@@ -402,9 +509,14 @@
                 id="cnaps"
                 name="cnaps"
                 required
+                th:classappend="${#fields.hasErrors('cnaps')} ? 'is-invalid' : ''"
               />
-              <span class="text-muted"
-              >Format: CNAPS-XXX-XXXXX</span>
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cnaps')}"
+                th:errors="*{cnaps}"
+              ></span>
+              <span class="text-muted">Format: CNAPS-XXX-XXXXX</span>
             </div>
           </div>
 

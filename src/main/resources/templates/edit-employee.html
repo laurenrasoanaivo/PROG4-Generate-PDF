@@ -117,7 +117,13 @@
                 th:field="*{lastName}"
                 id="lastName"
                 name="lastName"
+                th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('lastName')}"
+                th:errors="*{lastName}"
+              ></span>
             </div>
           </div>
 
@@ -132,7 +138,13 @@
                 th:field="*{firstName}"
                 id="firstName"
                 name="firstName"
+                th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('firstName')}"
+                th:errors="*{firstName}"
+              ></span>
             </div>
           </div>
 
@@ -147,7 +159,13 @@
                 th:value="${#temporals.format(editEmployeeModel.birthdate, 'yyyy-MM-dd')}"
                 id="birthdate"
                 name="birthdate"
+                th:classappend="${#fields.hasErrors('birthdate')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('birthdate')}"
+                th:errors="*{birthdate}"
+              ></span>
             </div>
           </div>
 
@@ -188,7 +206,10 @@
                 name="phoneNumbers"
                 required
               ></textarea>
-              <span class="text-muted">Format: +261 XX XX XXX XX, aller à la ligne pour ajouter d'autre numéro</span>
+              <span class="text-muted"
+                >Format: +261 XX XX XXX XX, aller à la ligne pour ajouter
+                d'autre numéro</span
+              >
             </div>
           </div>
 
@@ -201,7 +222,13 @@
                 th:field="*{address}"
                 id="address"
                 name="address"
+                th:classappend="${#fields.hasErrors('address')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('address')}"
+                th:errors="*{address}"
+              ></span>
             </div>
           </div>
 
@@ -246,8 +273,18 @@
                 th:field="*{cinNumber}"
                 id="cinNumber"
                 name="cinNumber"
+                th:classappend="${#fields.hasErrors('cinNumber')} ? 'is-invalid' : ''"
               />
-              <span class="text-muted">Format: 12 chiffres</span>
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cinNumber')}"
+                th:errors="*{cinNumber}"
+              ></span>
+              <span
+                th:unless="${#fields.hasErrors('cinNumber')}"
+                class="text-muted"
+                >Format: 12 chiffres</span
+              >
             </div>
           </div>
 
@@ -262,7 +299,13 @@
                 th:value="${#temporals.format(editEmployeeModel.cinIssuanceDate, 'yyyy-MM-dd')}"
                 id="cinIssuanceDate"
                 name="cinIssuanceDate"
+                th:classappend="${#fields.hasErrors('cinIssuanceDate')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cinIssuanceDate')}"
+                th:errors="*{cinIssuanceDate}"
+              ></span>
             </div>
           </div>
 
@@ -277,7 +320,13 @@
                 th:field="*{cinIssuancePlace}"
                 id="cinIssuancePlace"
                 name="cinIssuancePlace"
+                th:classappend="${#fields.hasErrors('cinIssuancePlace')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cinIssuancePlace')}"
+                th:errors="*{cinIssuancePlace}"
+              ></span>
             </div>
           </div>
 
@@ -292,7 +341,13 @@
                 th:field="*{position}"
                 id="position"
                 name="position"
+                th:classappend="${#fields.hasErrors('position')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('position')}"
+                th:errors="*{position}"
+              ></span>
             </div>
           </div>
 
@@ -307,7 +362,13 @@
                 th:field="*{dependentChildren}"
                 id="dependentChildren"
                 name="dependentChildren"
+                th:classappend="${#fields.hasErrors('dependentChildren')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('dependentChildren')}"
+                th:errors="*{dependentChildren}"
+              ></span>
             </div>
           </div>
 
@@ -322,7 +383,13 @@
                 th:value="${#temporals.format(editEmployeeModel.hireDate, 'yyyy-MM-dd')}"
                 id="hireDate"
                 name="hireDate"
+                th:classappend="${#fields.hasErrors('hireDate')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('hireDate')}"
+                th:errors="*{hireDate}"
+              ></span>
             </div>
           </div>
 
@@ -337,7 +404,13 @@
                 th:value="${#temporals.format(editEmployeeModel.departureDate, 'yyyy-MM-dd')}"
                 id="departureDate"
                 name="departureDate"
+                th:classappend="${#fields.hasErrors('departureDate')} ? 'is-invalid' : ''"
               />
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('departureDate')}"
+                th:errors="*{departureDate}"
+              ></span>
             </div>
           </div>
 
@@ -352,10 +425,16 @@
                 th:field="*{cnaps}"
                 id="cnaps"
                 name="cnaps"
+                th:classappend="${#fields.hasErrors('cnaps')} ? 'is-invalid' : ''"
               />
-              <span class="text-muted"
-              >Format: CNAPS-XXX-XXXXX</span>
-              >Format: CNAPS-XXX-XXXXX</span>
+              <span
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('cnaps')}"
+                th:errors="*{cnaps}"
+              ></span>
+              <span th:unless="${#fields.hasErrors('cnaps')}" class="text-muted"
+                >Format: CNAPS-XXX-XXXXX</span
+              >
             </div>
           </div>
 
