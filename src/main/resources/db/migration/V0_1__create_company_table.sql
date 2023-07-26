@@ -3,7 +3,7 @@ CREATE TABLE company (
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     slogan VARCHAR(255),
-    address VARCHAR(1000),
+    address VARCHAR(255),
     email VARCHAR(255),
     nif VARCHAR(255),
     stat VARCHAR(255),
