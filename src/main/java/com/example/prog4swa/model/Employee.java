@@ -55,6 +55,21 @@ public class Employee {
     public enum Gender {
         H,
         F
+    };
+
+    public enum CountryCode {
+        MADAGASCAR("+261"),
+        FRANCE("+33");
+
+        private final String code;
+
+        CountryCode(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
     }
 
 }

@@ -42,25 +42,28 @@ public class EmployeeService {
         return optionalEmployee.isPresent();
     }
 
-    public List<Employee> customSearch(String firstName, String lastName, String gender, String position, String hireDate, String departureDate, String sort) {
+    public List<Employee> customSearch(String firstName, String lastName, String gender, String position, String hireDate, String departureDate, String countryCode, String sort) {
         StringBuilder queryString = new StringBuilder("SELECT e FROM Employee e WHERE 1 = 1");
         if (firstName != null && !firstName.isEmpty()) {
-            queryString.append(" AND e.firstName LIKE :firstName");
+            queryString.append(" AND e.firstName ILIKE :firstName");
         }
         if (lastName != null && !lastName.isEmpty()) {
-            queryString.append(" AND e.lastName LIKE :lastName");
+            queryString.append(" AND e.lastName ILIKE :lastName");
         }
         if (gender != null && !gender.isEmpty()) {
             queryString.append(" AND e.gender = :gender");
         }
         if (position != null && !position.isEmpty()) {
-            queryString.append(" AND e.position LIKE :position");
+            queryString.append(" AND e.position ILIKE :position");
         }
         if (hireDate != null && !hireDate.isEmpty()) {
             queryString.append(" AND e.hireDate = :hireDate");
         }
         if (departureDate != null && !departureDate.isEmpty()) {
             queryString.append(" AND e.departureDate = :departureDate");
+        }
+        if (countryCode != null && !countryCode.isEmpty()) {
+            queryString.append(" AND EXISTS (SELECT p FROM e.phoneNumbers p WHERE p ILIKE :countryCode)");
         }
 
         if (!sort.isEmpty()) {
@@ -89,6 +92,9 @@ public class EmployeeService {
         }
         if (departureDate != null && !departureDate.isEmpty()) {
             query.setParameter("departureDate", LocalDate.parse(departureDate));
+        }
+        if (countryCode != null && !countryCode.isEmpty()) {
+            query.setParameter("countryCode", "%" + countryCode.trim() + "%");
         }
 
         return query.getResultList();

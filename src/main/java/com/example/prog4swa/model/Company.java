@@ -19,6 +19,8 @@ public class Company {
     private String slogan;
     private String address;
     private String email;
+    //@Enumerated(EnumType.STRING)
+    //private Employee.CountryCode countryCode;
     @ElementCollection
     @Column(unique = true)
     @CollectionTable(name = "all_phone_numbers", joinColumns = @JoinColumn(name = "company_id"))

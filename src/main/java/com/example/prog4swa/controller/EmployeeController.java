@@ -5,17 +5,11 @@ import com.example.prog4swa.controller.model.AddEmployeeModel;
 import com.example.prog4swa.controller.model.EditEmployeeModel;
 import com.example.prog4swa.model.Company;
 import com.example.prog4swa.model.Employee;
-import com.example.prog4swa.repository.EmployeeRepository;
 import com.example.prog4swa.service.CompanyService;
 import com.example.prog4swa.service.EmployeeService;
-import com.example.prog4swa.validation.UniqueValidator;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 import lombok.AllArgsConstructor;
-import org.hibernate.validator.HibernateValidator;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -49,12 +44,27 @@ public class EmployeeController implements WebMvcConfigurer {
                                    @RequestParam(name = "position", required = false) String position,
                                    @RequestParam(name = "hireDate", required = false) String hireDate,
                                    @RequestParam(name = "departureDate", required = false) String departureDate,
-                                   @RequestParam(name = "sort", defaultValue = "") String sort,
+                                   @RequestParam(name = "countryCode", required = false) String countryCode,
+                                   @RequestParam(name = "sort",  defaultValue = "id,asc") String sort,
+                                   @RequestParam(name = "page", defaultValue = "1") int page,
                                    Model model) {
-        List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate, departureDate, sort);
-        model.addAttribute("employees", employees);
+
+        int pageSize = 10;
+        List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate, departureDate, countryCode, sort);
+
+        int totalPages = (int) Math.ceil((double) employees.size() / pageSize);
+
+        List<Employee> employeesForPage = employees.stream()
+                .skip((page - 1) * pageSize)
+                .limit(pageSize)
+                .collect(Collectors.toList());
+
+        model.addAttribute("employees", employeesForPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", page);
         return "employees";
     }
+
 
     @GetMapping("/employees/{id}")
     public ModelAndView getEmployeeSheet(@PathVariable int id) {
@@ -141,8 +151,9 @@ public class EmployeeController implements WebMvcConfigurer {
                                                       @RequestParam(name = "position", required = false) String position,
                                                       @RequestParam(name = "hireDate", required = false) String hireDate,
                                                       @RequestParam(name = "departureDate", required = false) String departureDate,
-                                                      @RequestParam(name = "sort", defaultValue = "") String sort) {
-        List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate, departureDate, sort);
+                                                      @RequestParam(name = "countryCode", required = false) String countryCode,
+                                                      @RequestParam(name = "sort", defaultValue = "id,asc") String sort) {
+        List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate, departureDate, countryCode, sort);
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=\"employees.csv\"");
 
