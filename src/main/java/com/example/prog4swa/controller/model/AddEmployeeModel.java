@@ -1,10 +1,7 @@
 package com.example.prog4swa.controller.model;
 
 import com.example.prog4swa.model.Employee;
-import com.example.prog4swa.validation.ValidDate;
-import com.example.prog4swa.validation.ValidSimplePattern;
-import com.example.prog4swa.validation.ValidSimpleString;
-import com.example.prog4swa.validation.ValidUnique;
+import com.example.prog4swa.validation.*;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
@@ -25,6 +22,7 @@ public class AddEmployeeModel {
     @ValidDate(value = 18, message = "L' employée doit avoir plus de 18 ans et moins de 60 ans")
     private LocalDate birthdate;
     private Employee.Gender gender;
+    @ValidPhoneNumber
     private String phoneNumbers;
     @ValidSimpleString
     private String address;

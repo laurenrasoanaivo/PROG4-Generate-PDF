@@ -1,5 +1,6 @@
 package com.example.prog4swa.controller.model;
 
+import com.example.prog4swa.validation.ValidPhoneNumber;
 import com.example.prog4swa.validation.ValidSimplePattern;
 import com.example.prog4swa.validation.ValidSimpleString;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class EditCompanyModel {
     @ValidSimpleString(max = 255)
     private String address;
     private String email;
+    @ValidPhoneNumber
     private String phoneNumbers;
     @ValidSimplePattern(pattern = "\\d{10}", message = "NIF doit etre au format de 10 chiffres")
     private String nif;
