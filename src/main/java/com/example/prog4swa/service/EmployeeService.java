@@ -42,7 +42,8 @@ public class EmployeeService {
         return optionalEmployee.isPresent();
     }
 
-    public List<Employee> customSearch(String firstName, String lastName, String gender, String position, String hireDate, String departureDate, String countryCode, String sort) {
+    public List<Employee> customSearch(String firstName, String lastName, String gender, String position, String hireDate1, String hireDate2, String departureDate1, String departureDate2, String countryCode, String sort) {
+        LocalDate date = LocalDate.now();
         StringBuilder queryString = new StringBuilder("SELECT e FROM Employee e WHERE 1 = 1");
         if (firstName != null && !firstName.isEmpty()) {
             queryString.append(" AND e.firstName ILIKE :firstName");
@@ -56,11 +57,21 @@ public class EmployeeService {
         if (position != null && !position.isEmpty()) {
             queryString.append(" AND e.position ILIKE :position");
         }
-        if (hireDate != null && !hireDate.isEmpty()) {
-            queryString.append(" AND e.hireDate = :hireDate");
+        if (hireDate1 != null && !hireDate1.isEmpty()) {
+            queryString.append(" AND e.hireDate >= :hireDate1");
+            if (hireDate2 != null && !hireDate2.isEmpty()) {
+                queryString.append(" AND e.hireDate <= :hireDate2");
+            } else {
+                queryString.append(" AND e.hireDate <= :date");
+            }
         }
-        if (departureDate != null && !departureDate.isEmpty()) {
-            queryString.append(" AND e.departureDate = :departureDate");
+        if (departureDate1 != null && !departureDate1.isEmpty()) {
+            queryString.append(" AND e.departureDate >= :departureDate1");
+            if (departureDate2 != null && !departureDate2.isEmpty()) {
+                queryString.append(" AND e.departureDate <= :departureDate2");
+            } else {
+                queryString.append(" AND e.departureDate <= :date");
+            }
         }
         if (countryCode != null && !countryCode.isEmpty()) {
             queryString.append(" AND EXISTS (SELECT p FROM e.phoneNumbers p WHERE p ILIKE :countryCode)");
@@ -87,11 +98,21 @@ public class EmployeeService {
         if (position != null && !position.isEmpty()) {
             query.setParameter("position", "%" + position.trim() + "%");
         }
-        if (hireDate != null && !hireDate.isEmpty()) {
-            query.setParameter("hireDate", LocalDate.parse(hireDate));
+        if (hireDate1 != null && !hireDate1.isEmpty()) {
+            query.setParameter("hireDate1", LocalDate.parse(hireDate1));
+            if (hireDate2 != null && !hireDate2.isEmpty()) {
+                query.setParameter("hireDate2", LocalDate.parse(hireDate2));
+            } else {
+                query.setParameter("date", date);
+            }
         }
-        if (departureDate != null && !departureDate.isEmpty()) {
-            query.setParameter("departureDate", LocalDate.parse(departureDate));
+        if (departureDate1 != null && !departureDate1.isEmpty()) {
+            query.setParameter("departureDate1", LocalDate.parse(departureDate1));
+            if (departureDate2 != null && !departureDate2.isEmpty()) {
+                query.setParameter("departureDate2", LocalDate.parse(departureDate2));
+            } else {
+                query.setParameter("date", date);
+            }
         }
         if (countryCode != null && !countryCode.isEmpty()) {
             query.setParameter("countryCode", "%" + countryCode.trim() + "%");

@@ -42,15 +42,17 @@ public class EmployeeController implements WebMvcConfigurer {
                                    @RequestParam(name = "lastName", required = false) String lastName,
                                    @RequestParam(name = "gender", required = false) String gender,
                                    @RequestParam(name = "position", required = false) String position,
-                                   @RequestParam(name = "hireDate", required = false) String hireDate,
-                                   @RequestParam(name = "departureDate", required = false) String departureDate,
+                                   @RequestParam(name = "hireDate1", required = false) String hireDate1,
+                                   @RequestParam(name = "hireDate2", required = false) String hireDate2,
+                                   @RequestParam(name = "departureDate1", required = false) String departureDate1,
+                                   @RequestParam(name = "departureDate2", required = false) String departureDate2,
                                    @RequestParam(name = "countryCode", required = false) String countryCode,
                                    @RequestParam(name = "sort",  defaultValue = "id,asc") String sort,
                                    @RequestParam(name = "page", defaultValue = "1") int page,
                                    Model model) {
 
         int pageSize = 10;
-        List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate, departureDate, countryCode, sort);
+        List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate1, hireDate2, departureDate1, departureDate2, countryCode, sort);
 
         int totalPages = (int) Math.ceil((double) employees.size() / pageSize);
 
@@ -77,7 +79,7 @@ public class EmployeeController implements WebMvcConfigurer {
     public String showAddEmployeeForm(AddEmployeeModel addEmployeeModel) {
         return "add-employee";
     }
-
+z
     @PostMapping(value = "/employees/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String addEmployee(@Valid AddEmployeeModel addEmployeeModel,
                               BindingResult result) {
@@ -149,17 +151,19 @@ public class EmployeeController implements WebMvcConfigurer {
                                                       @RequestParam(name = "lastName", required = false) String lastName,
                                                       @RequestParam(name = "gender", required = false) String gender,
                                                       @RequestParam(name = "position", required = false) String position,
-                                                      @RequestParam(name = "hireDate", required = false) String hireDate,
-                                                      @RequestParam(name = "departureDate", required = false) String departureDate,
+                                                      @RequestParam(name = "hireDate1", required = false) String hireDate1,
+                                                      @RequestParam(name = "hireDate2", required = false) String hireDate2,
+                                                      @RequestParam(name = "departureDate1", required = false) String departureDate1,
+                                                      @RequestParam(name = "departureDate2", required = false) String departureDate2,
                                                       @RequestParam(name = "countryCode", required = false) String countryCode,
                                                       @RequestParam(name = "sort", defaultValue = "id,asc") String sort) {
-        List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate, departureDate, countryCode, sort);
+        List<Employee> employees = service.customSearch(firstName, lastName, gender, position, hireDate1, hireDate2, departureDate1, departureDate2, countryCode, sort);
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=\"employees.csv\"");
 
         return outputStream -> {
             OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
-            writer.write("Id,Nom,Prenom,Genre,Fonction,DateEmbauche,DateDepart\n");
+            writer.write("Id,Nom,Prenom,Genre,Fonction,DateEmbauche,DateDepart,Telephone\n");
 
             for (Employee employee : employees) {
                 writer.write(
@@ -169,7 +173,8 @@ public class EmployeeController implements WebMvcConfigurer {
                                 employee.getGender() + "," +
                                 "\"" + employee.getPosition() + "\"," +
                                 employee.getHireDate() + "," +
-                                (employee.getDepartureDate() != null ? employee.getDepartureDate() : "") + "\n"
+                                (employee.getDepartureDate() != null ? employee.getDepartureDate() : "") + "," +
+                                employee.getPhoneNumbers() + "\n"
                 );
             }
 
