@@ -1,13 +1,11 @@
 package com.example.prog4swa.validation;
 
-import com.example.prog4swa.model.Employee;
-import com.example.prog4swa.service.EmployeeService;
+import com.example.prog4swa.db1.model.Employee;
+import com.example.prog4swa.db1.service.EmployeeService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class PhoneNumberValidator implements ConstraintValidator<ValidPhoneNumber, String> {
     private boolean REQUIRED;

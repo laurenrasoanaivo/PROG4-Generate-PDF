@@ -1,6 +1,6 @@
 package com.example.prog4swa;
 
-import com.example.prog4swa.controller.security.SessionFilter;
+import com.example.prog4swa.db1.controller.security.SessionFilter;
 import jakarta.servlet.MultipartConfigElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -20,13 +20,13 @@ import org.springframework.web.util.UrlPathHelper;
 @Configuration
 public class PROG4SWAApplication implements WebMvcConfigurer{
 
-	@Autowired
+	/*@Autowired
 	private SessionFilter sessionFilter;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(sessionFilter).addPathPatterns("/**");
-	}
+	}*/
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

@@ -87,7 +87,7 @@
             <select class="form-select" name="gender" aria-label="genre">
               <option class="text-muted" value="">genre</option>
               <option
-                th:each="gender : ${T(com.example.prog4swa.model.Employee.Gender).values()}"
+                th:each="gender : ${T(com.example.prog4swa.db1.model.Employee.Gender).values()}"
                 th:value="${gender}"
                 th:text="${gender}"
               ></option>
@@ -137,7 +137,7 @@
             <select class="form-select" name="countryCode" aria-label="countryCode">
               <option class="text-muted" value="">code pays</option>
               <option
-                      th:each="code : ${T(com.example.prog4swa.model.Employee.CountryCode).values()}"
+                      th:each="code : ${T(com.example.prog4swa.db1.model.Employee.CountryCode).values()}"
                       th:value="${code.getCode()}"
                       th:text="${code.getCode()}"
               ></option>
