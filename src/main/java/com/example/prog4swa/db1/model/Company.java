@@ -21,7 +21,7 @@ public class Company {
     private String address;
     private String email;
     @ElementCollection
-    @Column(unique = true)
+    @Column(unique = true, name = "phone_numbers")
     @CollectionTable(name = "all_phone_numbers", joinColumns = @JoinColumn(name = "company_id"))
     private List<String> phoneNumbers;
     private String nif;

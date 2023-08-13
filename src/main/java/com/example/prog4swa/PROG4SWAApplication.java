@@ -20,13 +20,13 @@ import org.springframework.web.util.UrlPathHelper;
 @Configuration
 public class PROG4SWAApplication implements WebMvcConfigurer{
 
-	/*@Autowired
+	@Autowired
 	private SessionFilter sessionFilter;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(sessionFilter).addPathPatterns("/**");
-	}*/
+	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

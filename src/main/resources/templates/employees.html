@@ -65,7 +65,45 @@
     <div class="payslip">
       <h2 class="p-2 text-center">List Employés</h2>
       <form th:action="@{/employees}" method="get">
-        <div class="d-flex flex-wrap">
+        <div class="d-flex justify-content-between">
+          <div class="mx-1 my-3 col-3">
+            <p>
+              Date d'emboche entre
+              <input
+                class="form-control"
+                type="date"
+                name="hireDate1"
+                th:value="${param.hireDate1}"
+              />
+              et
+              <input
+                class="form-control"
+                type="date"
+                name="hireDate2"
+                th:value="${param.hireDate2}"
+              />
+            </p>
+          </div>
+          <div class="mx-1 my-3 col-3">
+            <p>
+              Date de depart entre
+              <input
+                class="form-control"
+                type="date"
+                name="departureDate1"
+                th:value="${param.departureDate1}"
+              />
+              et
+              <input
+                class="form-control"
+                type="date"
+                name="departureDate2"
+                th:value="${param.departureDate2}"
+              />
+            </p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between">
           <div class="mx-1 my-3 col">
             <input
               class="form-control"
@@ -80,6 +118,7 @@
               class="form-control"
               type="text"
               name="firstName"
+              th:value="${param.firstName}"
               placeholder="prenom"
             />
           </div>
@@ -98,57 +137,26 @@
               class="form-control"
               type="text"
               name="position"
+              th:value="${param.function}"
               placeholder="fonction"
             />
-          </div>
-          <div class="mx-1 my-3 col">
-            <p>
-              Date demboche entre
-              <input
-                class="form-control"
-                type="date"
-                name="hireDate1"
-              />
-              et
-              <input
-                class="form-control"
-                type="date"
-                name="hireDate2"
-              />
-            </p>
-          </div>
-          <div class="mx-1 my-3 col">
-            <p>
-              Date de depart entre
-              <input
-                class="form-control"
-                type="date"
-                name="departureDate1"
-              />
-              et
-              <input
-                class="form-control"
-                type="date"
-                name="departureDate2"
-              />
-            </p>
           </div>
           <div class="mx-1 my-3 col">
             <select class="form-select" name="countryCode" aria-label="countryCode">
               <option class="text-muted" value="">code pays</option>
               <option
-                      th:each="code : ${T(com.example.prog4swa.db1.model.Employee.CountryCode).values()}"
-                      th:value="${code.getCode()}"
-                      th:text="${code.getCode()}"
+                th:each="code : ${T(com.example.prog4swa.db1.model.Employee.CountryCode).values()}"
+                th:value="${code.getCode()}"
+                th:text="${code.getCode()}"
               ></option>
             </select>
           </div>
-          <div class="mx-1 my-3 col">
+          <div class="mx-1 my-3">
             <button class="btn btn-primary" type="submit">Search</button>
           </div>
-          <div class="mx-1 my-3 col">
-            <button class="btn btn-primary" type="reset">
-              <a th:href="@{/employees(lastName='', firstName='', gender='', position='', hireDate1='', hireDate2='', departureDate1='', departureDate2='', countryCode='', sort='id,asc')}">
+          <div class="mx-1 my-3">
+            <button class="btn btn-secondary" type="reset">
+              <a class="text-decoration-none text-white" th:href="@{/employees(lastName='', firstName='', gender='', position='', hireDate1='', hireDate2='', departureDate1='', departureDate2='', countryCode='', sort='id,asc')}">
                 Reset</a>
             </button>
           </div>
@@ -346,7 +354,7 @@
       <div>
         <a
           class="btn btn-success"
-          th:href="@{/export/csv(lastName=${param.lastName}, firstName=${param.firstName}, gender=${param.gender}, position=${param.position}, hireDate=${param.hireDate}, departureDate=${param.departureDate}, countryCode=${param.countryCode}, sort=${param.sort})}"
+          th:href="@{/export/csv(lastName=${param.lastName}, firstName=${param.firstName}, gender=${param.gender}, position=${param.position}, hireDate1=${param.hireDate1}, hireDate2=${param.hireDate2}, departureDate1=${param.departureDate1}, departureDate2=${param.departureDate2}, countryCode=${param.countryCode}, sort=${param.sort})}"
           >Exporter en CSV</a
         >
       </div>

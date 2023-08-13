@@ -16,14 +16,12 @@ public class UserSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
-
-    @Column(unique = true)
+    @Column(name = "session_id")
     private String sessionId;
-
+    @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 
 }
