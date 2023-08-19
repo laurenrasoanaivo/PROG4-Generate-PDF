@@ -1,6 +1,7 @@
 package com.example.prog4swa.db1.service;
 
 import com.example.prog4swa.db1.model.Employee;
+import com.example.prog4swa.db1.repository.CnapsNumberRepository;
 import com.example.prog4swa.db1.repository.EmployeeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -21,15 +22,27 @@ public class EmployeeService {
     private final EmployeeRepository repository;
     @Autowired
     private final EntityManager db1EntityManager;
+    @Autowired
+    private final CnapsNumberRepository cnapsNumberRepository;
 
     public EmployeeService(EmployeeRepository repository,
-                           @Qualifier("db1EntityManagerFactory") EntityManager db1EntityManager) {
+                           @Qualifier("db1EntityManagerFactory") EntityManager db1EntityManager, CnapsNumberRepository cnapsNumberRepository) {
         this.repository = repository;
         this.db1EntityManager = db1EntityManager;
+        this.cnapsNumberRepository = cnapsNumberRepository;
     }
 
     public List<Employee> getEmployees() {
         return repository.findAll();
+    }
+
+    public Employee getEmployeeDetails(int employeeId) {
+        Employee employee = repository.findById(employeeId).orElse(null);
+        if (employee != null) {
+            String cnapsNumber = cnapsNumberRepository.getCnapsNumberByEmployeeId(employeeId);
+            employee.setCnaps(cnapsNumber);
+        }
+        return employee;
     }
 
     public Employee getEmployeeById(int id) {
@@ -41,8 +54,8 @@ public class EmployeeService {
         }
     }
 
-    public void addOrUpdateEmployee(Employee newEmployee){
-        repository.save(newEmployee);
+    public Employee addOrUpdateEmployee(Employee newEmployee){
+        return repository.save(newEmployee);
     }
 
     public boolean isSerialNumberExists(String serialNumber) {

@@ -1,4 +1,4 @@
-INSERT INTO employee (id, serial_number, first_name, last_name, birthdate, gender, address, cin_number, cin_issuance_date, cin_issuance_place, position, dependent_children, hire_date, departure_date, salary, benefits, allowances, social_security_contributions, taxable_income, tax_rate, net_income, cnaps, photo)
+/*INSERT INTO employee (id, serial_number, first_name, last_name, birthdate, gender, address, cin_number, cin_issuance_date, cin_issuance_place, position, dependent_children, hire_date, departure_date, salary, benefits, allowances, social_security_contributions, taxable_income, tax_rate, net_income, cnaps, photo)
 VALUES
 (1, 'EMP-2021-01-10-00001', 'John', 'Doe', '1990-05-15', 'H', '123 Main Street', '123456789012', '2005-08-23', 'City A', 'Manager', 2, '2021-01-10', NULL, 50000.0, 5000.0, 2000.0, 1000.0, 47000.0, 0.1, 42300.0, 'CNAPS-001-23456', NULL),
 (2, 'EMP-2020-03-05-00002', 'Jane', 'Smith', '1988-11-22', 'F', '456 Maple Avenue', '234567890123', '2003-04-17', 'City B', 'Engineer', 1, '2020-03-05', NULL, 45000.0, 4000.0, 1500.0, 900.0, 40000.0, 0.12, 35200.0, 'CNAPS-002-34567', NULL),
@@ -105,8 +105,8 @@ VALUES
 (17, 'ryan@techsolutions.com'),
 (18, 'emilie@techsolutions.com'),
 (19, 'dany@techsolutions.com'),
-(20, 'sofia@techsolutions.com');
+(20, 'sofia@techsolutions.com');*/
 
 INSERT INTO all_phone_numbers (company_id, phone_numbers)
 VALUES
-(1, '+261 34 11 222 33');
+(1, '+261 034 11 222 33');

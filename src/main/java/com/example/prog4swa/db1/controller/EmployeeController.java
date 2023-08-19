@@ -7,6 +7,8 @@ import com.example.prog4swa.db1.model.Company;
 import com.example.prog4swa.db1.model.Employee;
 import com.example.prog4swa.db1.service.CompanyService;
 import com.example.prog4swa.db1.service.EmployeeService;
+import com.example.prog4swa.db2.mapper.DB2EmployeeMapper;
+import com.example.prog4swa.db2.service.DB2EmployeeService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -31,6 +33,8 @@ public class EmployeeController implements WebMvcConfigurer {
     private final EmployeeService service;
     private final CompanyService companyService;
     private final EmployeeMapper mapper;
+    private final DB2EmployeeMapper db2EmployeeMapper;
+    private final DB2EmployeeService db2EmployeeService;
 
     @ModelAttribute("company")
     public Company sharedCompany() {
@@ -67,10 +71,9 @@ public class EmployeeController implements WebMvcConfigurer {
         return "employees";
     }
 
-
     @GetMapping("/employees/{id}")
     public ModelAndView getEmployeeSheet(@PathVariable int id) {
-        Employee employee = service.getEmployeeById(id);
+        Employee employee = service.getEmployeeDetails(id);
         return new ModelAndView("employee-sheet")
                 .addObject("employeeSheet", employee);
     }
@@ -86,13 +89,14 @@ public class EmployeeController implements WebMvcConfigurer {
         if(result.hasErrors()){
             return "add-employee";
         }
-        service.addOrUpdateEmployee(mapper.toEntity(addEmployeeModel));
+        Employee emp = service.addOrUpdateEmployee(mapper.toEntity(addEmployeeModel));
+        db2EmployeeService.addOrUpdateDB2Employee(db2EmployeeMapper.toEntity(emp));
         return "redirect:/employees";
     }
 
     @GetMapping("/employees/edit/{id}")
     public ModelAndView showEditEmployeeForm(@PathVariable int id) {
-        Employee existingEmployee = service.getEmployeeById(id);
+        Employee existingEmployee = service.getEmployeeDetails(id);
         return new ModelAndView("edit-employee")
                 .addObject("editEmployeeModel", mapper.toEditEmployeeModel(existingEmployee));
     }
@@ -107,13 +111,14 @@ public class EmployeeController implements WebMvcConfigurer {
             return "edit-employee";
         }
 
-        Employee editEmployee = mapper.toEntity(editEmployeeModel);
+        Employee editingEmployee = mapper.toEntity(editEmployeeModel);
 
         if(photoFile != null && !photoFile.isEmpty()){
-            editEmployee.setPhoto(service.convertToBase64Photo(photoFile));
+            editingEmployee.setPhoto(service.convertToBase64Photo(photoFile));
         }
 
-        service.addOrUpdateEmployee(editEmployee);
+        Employee emp = service.addOrUpdateEmployee(editingEmployee);
+        //db2EmployeeService.addOrUpdateDB2Employee(db2EmployeeMapper.toEntity(emp));
         return "redirect:/employees/"+id;
     }
 
@@ -141,7 +146,8 @@ public class EmployeeController implements WebMvcConfigurer {
 
         Employee editEmployeePayslip = mapper.toEntity(editEmployeeModel);
 
-        service.addOrUpdateEmployee(editEmployeePayslip);
+        Employee emp = service.addOrUpdateEmployee(editEmployeePayslip);
+        db2EmployeeService.addOrUpdateDB2Employee(db2EmployeeMapper.toEntity(emp));
         return "redirect:/employees/payslip/"+id;
     }
 

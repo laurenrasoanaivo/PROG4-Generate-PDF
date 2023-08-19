@@ -58,8 +58,5 @@ public class EditEmployeeModel {
     private double taxRate;
     @Min(value = 0, message = "La valeur doit être supérieur ou égal à 0.")
     private double netIncome;
-    @ValidSimplePattern(pattern = "^CNAPS-\\d{3}-\\d{5}$", message = "Le numéro CNAPS doit etre au format CNAPS-XXX-XXXXX")
-    private String cnaps;
     private String photo;
 }
-

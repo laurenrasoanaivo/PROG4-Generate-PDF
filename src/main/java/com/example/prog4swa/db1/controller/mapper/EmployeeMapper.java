@@ -43,6 +43,7 @@ public class EmployeeMapper {
     }
 
     public Employee toEntity(EditEmployeeModel editEmployee) {
+        Employee originalEmployee = service.getEmployeeById(editEmployee.getId());
         return Employee.builder()
                 .id(editEmployee.getId())
                 .serialNumber(editEmployee.getSerialNumber())
@@ -67,7 +68,7 @@ public class EmployeeMapper {
                 .taxableIncome(editEmployee.getTaxableIncome())
                 .taxRate(editEmployee.getTaxRate())
                 .netIncome(editEmployee.getNetIncome())
-                .cnaps(editEmployee.getCnaps())
+                .cnaps(originalEmployee.getCnaps())
                 .photo(editEmployee.getPhoto())
                 .build();
     }
@@ -98,7 +99,6 @@ public class EmployeeMapper {
                 .taxableIncome(employee.getTaxableIncome())
                 .taxRate(employee.getTaxRate())
                 .netIncome(employee.getNetIncome())
-                .cnaps(employee.getCnaps())
                 .photo(employee.getPhoto())
                 .build();
     }
