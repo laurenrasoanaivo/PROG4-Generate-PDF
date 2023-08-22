@@ -118,7 +118,7 @@ public class EmployeeController implements WebMvcConfigurer {
         }
 
         Employee emp = service.addOrUpdateEmployee(editingEmployee);
-        //db2EmployeeService.addOrUpdateDB2Employee(db2EmployeeMapper.toEntity(emp));
+        db2EmployeeService.addOrUpdateDB2Employee(db2EmployeeMapper.toEntityEdit(emp));
         return "redirect:/employees/"+id;
     }
 
@@ -147,7 +147,7 @@ public class EmployeeController implements WebMvcConfigurer {
         Employee editEmployeePayslip = mapper.toEntity(editEmployeeModel);
 
         Employee emp = service.addOrUpdateEmployee(editEmployeePayslip);
-        db2EmployeeService.addOrUpdateDB2Employee(db2EmployeeMapper.toEntity(emp));
+        db2EmployeeService.addOrUpdateDB2Employee(db2EmployeeMapper.toEntityEdit(emp));
         return "redirect:/employees/payslip/"+id;
     }
 
