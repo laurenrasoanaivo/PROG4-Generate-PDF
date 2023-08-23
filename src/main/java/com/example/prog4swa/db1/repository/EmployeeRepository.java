@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Optional<Employee> findBySerialNumber(String serialNumber);
     Optional<Employee> findByCinNumber(String cinNumber);
-    Optional<Employee> findByCnaps(String cnaps);
 }

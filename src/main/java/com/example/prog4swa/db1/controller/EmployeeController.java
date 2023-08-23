@@ -7,7 +7,6 @@ import com.example.prog4swa.db1.model.Company;
 import com.example.prog4swa.db1.model.Employee;
 import com.example.prog4swa.db1.service.CompanyService;
 import com.example.prog4swa.db1.service.EmployeeService;
-import com.example.prog4swa.db2.mapper.DB2EmployeeMapper;
 import com.example.prog4swa.db2.service.DB2EmployeeService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -33,7 +32,6 @@ public class EmployeeController implements WebMvcConfigurer {
     private final EmployeeService service;
     private final CompanyService companyService;
     private final EmployeeMapper mapper;
-    private final DB2EmployeeMapper db2EmployeeMapper;
     private final DB2EmployeeService db2EmployeeService;
 
     @ModelAttribute("company")
@@ -89,8 +87,7 @@ public class EmployeeController implements WebMvcConfigurer {
         if(result.hasErrors()){
             return "add-employee";
         }
-        Employee emp = service.addOrUpdateEmployee(mapper.toEntity(addEmployeeModel));
-        db2EmployeeService.addOrUpdateDB2Employee(db2EmployeeMapper.toEntity(emp));
+        service.addOrUpdateEmployee(mapper.toEntity(addEmployeeModel));
         return "redirect:/employees";
     }
 
@@ -117,8 +114,7 @@ public class EmployeeController implements WebMvcConfigurer {
             editingEmployee.setPhoto(service.convertToBase64Photo(photoFile));
         }
 
-        Employee emp = service.addOrUpdateEmployee(editingEmployee);
-        db2EmployeeService.addOrUpdateDB2Employee(db2EmployeeMapper.toEntityEdit(emp));
+        service.addOrUpdateEmployee(editingEmployee);
         return "redirect:/employees/"+id;
     }
 
@@ -146,8 +142,7 @@ public class EmployeeController implements WebMvcConfigurer {
 
         Employee editEmployeePayslip = mapper.toEntity(editEmployeeModel);
 
-        Employee emp = service.addOrUpdateEmployee(editEmployeePayslip);
-        db2EmployeeService.addOrUpdateDB2Employee(db2EmployeeMapper.toEntityEdit(emp));
+        service.addOrUpdateEmployee(editEmployeePayslip);
         return "redirect:/employees/payslip/"+id;
     }
 

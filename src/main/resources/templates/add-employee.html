@@ -503,29 +503,6 @@
           </div>
 
           <div class="row mb-3 align-items-center">
-            <label class="col-sm-3 col-form-label" for="cnaps"
-              >Numéro CNAPS</label
-            >
-            <div class="col-sm-9">
-              <input
-                class="form-control bg-light"
-                type="text"
-                th:field="*{cnaps}"
-                id="cnaps"
-                name="cnaps"
-                required
-                th:classappend="${#fields.hasErrors('cnaps')} ? 'is-invalid' : ''"
-              />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('cnaps')}"
-                th:errors="*{cnaps}"
-              ></span>
-              <span class="text-muted">Format: CNAPS-XXX-XXXXX</span>
-            </div>
-          </div>
-
-          <div class="row mb-3 align-items-center">
             <label class="col-sm-3 col-form-label" for="photo">Photo</label>
             <div class="col-sm-9">
               <input

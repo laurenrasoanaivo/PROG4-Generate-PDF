@@ -51,4 +51,4 @@ CREATE TABLE all_emails (
     FOREIGN KEY (employee_id) REFERENCES employee(id)
 );
 
-ALTER sequence employee_id_seq restart WITH 21;
+ALTER sequence employee_id_seq restart WITH 2;

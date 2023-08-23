@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @AllArgsConstructor
-@Data
+@Getter
 @NoArgsConstructor
 @ToString
 @Builder
@@ -23,6 +23,7 @@ public class DB2Employee {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @Column
     private LocalDate birthdate;
     @Enumerated(EnumType.STRING)
     private com.example.prog4swa.db1.model.Employee.Gender gender;
@@ -30,6 +31,7 @@ public class DB2Employee {
     @Column(unique = true, name = "phone_numbers")
     @CollectionTable(name = "all_phone_numbers", joinColumns = @JoinColumn(name = "employee_id"))
     private List<String> phoneNumbers;
+    @Column
     private String address;
     @ElementCollection
     @Column(unique = true)
@@ -41,6 +43,7 @@ public class DB2Employee {
     private LocalDate cinIssuanceDate;
     @Column(name = "cin_issuance_place")
     private String cinIssuancePlace;
+    @Column
     private String position;
     @Column(name = "dependent_children")
     private int dependentChildren;
@@ -48,8 +51,11 @@ public class DB2Employee {
     private LocalDate hireDate;
     @Column(name = "departure_date")
     private LocalDate departureDate;
+    @Column
     private double salary;
+    @Column
     private double benefits;
+    @Column
     private double allowances;
     @Column(name = "social_security_contributions")
     private double socialSecurityContributions;

@@ -30,8 +30,6 @@ public class UniqueValidator implements ConstraintValidator<ValidUnique, String>
         }
         if(Objects.equals(VALUE, "cinNumber"))
             return repository.findByCinNumber(valueUnique).isEmpty();
-        if(Objects.equals(VALUE, "cnaps"))
-            return repository.findByCnaps(valueUnique).isEmpty();
         return !valueUnique.isEmpty();
     }
 }
