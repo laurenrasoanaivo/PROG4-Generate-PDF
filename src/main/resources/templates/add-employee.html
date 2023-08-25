@@ -105,7 +105,7 @@
             <div class="col-sm-9">
               <div
                 class="form-check form-check-inline"
-                th:each="gender : ${T(com.example.prog4swa.model.Employee.Gender).values()}"
+                th:each="gender : ${T(com.example.prog4swa.db1.model.Employee.Gender).values()}"
               >
                 <input
                   class="form-check-input"
@@ -136,9 +136,16 @@
                 th:field="*{phoneNumbers}"
                 name="phoneNumbers"
                 required
+                th:classappend="${#fields.hasErrors('phoneNumbers')} ? 'is-invalid' : ''"
               ></textarea>
+              <span
+                      class="invalid-feedback"
+                      th:if="${#fields.hasErrors('phoneNumbers')}"
+                      th:errors="*{phoneNumbers}"
+              ></span>
               <span class="text-muted"
-                >Aller à la ligne pour ajouter d'autre numéro (N'oublier pas le code pays)</span
+                    th:unless="${#fields.hasErrors('phoneNumbers')}"
+                >Aller à la ligne pour ajouter d'autre numéro, Format: Code pays + 10 chiffres</span
               >
             </div>
           </div>
@@ -492,29 +499,6 @@
                 th:if="${#fields.hasErrors('netIncome')}"
                 th:errors="*{netIncome}"
               ></span>
-            </div>
-          </div>
-
-          <div class="row mb-3 align-items-center">
-            <label class="col-sm-3 col-form-label" for="cnaps"
-              >Numéro CNAPS</label
-            >
-            <div class="col-sm-9">
-              <input
-                class="form-control bg-light"
-                type="text"
-                th:field="*{cnaps}"
-                id="cnaps"
-                name="cnaps"
-                required
-                th:classappend="${#fields.hasErrors('cnaps')} ? 'is-invalid' : ''"
-              />
-              <span
-                class="invalid-feedback"
-                th:if="${#fields.hasErrors('cnaps')}"
-                th:errors="*{cnaps}"
-              ></span>
-              <span class="text-muted">Format: CNAPS-XXX-XXXXX</span>
             </div>
           </div>
 

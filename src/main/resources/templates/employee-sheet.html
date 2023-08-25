@@ -57,7 +57,7 @@
       </div>
     </nav>
 
-    <h2 class="text-center p-3">Fiche Employée</h2>
+    <h2 class="text-center p-3">Fiche Employé</h2>
     <div class="shadow-sm card mb-3 mx-auto w-50">
       <div class="row g-0">
         <div class="col-md-3 bg-dark">
@@ -175,14 +175,25 @@
               <strong>Lieu de délivrance:</strong>
               <span th:text="${employeeSheet.cinIssuancePlace}"></span>
             </div>
-            <div class="py-3">
-              <button class="btn btn-success" type="button">
-                <a
-                  class="text-decoration-none text-light"
-                  th:href="@{/employees/payslip/{id}(id=${employeeSheet.id})}"
+            <div class="py-3 d-flex justify-content-between">
+              <div>
+                <button class="btn btn-success" type="button">
+                  <a
+                    class="text-decoration-none text-light"
+                    th:href="@{/employees/payslip/{id}(id=${employeeSheet.id})}"
                   >Fiche de paye</a
-                >
-              </button>
+                  >
+                </button>
+              </div>
+              <div>
+                <button class="btn btn-secondary" type="button">
+                  <a
+                    class="text-decoration-none text-light"
+                    th:href="@{/employees/details/{id}(id=${employeeSheet.id})}"
+                  >Exporter en pdf</a
+                  >
+                </button>
+              </div>
             </div>
           </div>
         </div>
