@@ -8,6 +8,7 @@ import com.example.prog4swa.db1.model.Employee;
 import com.example.prog4swa.db1.service.CompanyService;
 import com.example.prog4swa.db1.service.EmployeeService;
 import com.example.prog4swa.db2.service.DB2EmployeeService;
+import com.lowagie.text.DocumentException;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -74,6 +76,15 @@ public class EmployeeController implements WebMvcConfigurer {
         Employee employee = service.getEmployeeDetails(id);
         return new ModelAndView("employee-sheet")
                 .addObject("employeeSheet", employee);
+    }
+
+    @GetMapping("/employees/details/{id}")
+    public String getEmployeeDetails(@PathVariable int id) throws DocumentException, IOException {
+        Employee employee = service.getEmployeeDetails(id);
+        Company company = companyService.getCompany();
+        String value = service.parseThymeleafTemplate(employee, company);
+        service.generatePdfFromHtml(employee, value);
+        return "redirect:/employees/"+id;
     }
 
     @GetMapping("/employees/add")

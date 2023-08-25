@@ -1,8 +1,10 @@
 package com.example.prog4swa.db1.service;
 
+import com.example.prog4swa.db1.model.Company;
 import com.example.prog4swa.db1.model.Employee;
 import com.example.prog4swa.db1.repository.EmployeeCnapsRepository;
 import com.example.prog4swa.db1.repository.EmployeeRepository;
+import com.lowagie.text.DocumentException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 @Service
@@ -176,6 +184,11 @@ public class EmployeeService {
         return joiner.toString();
     }
 
+    public int calculateAge(LocalDate birthDate) {
+        LocalDate currentDate = LocalDate.now();
+        return Period.between(birthDate, currentDate).getYears();
+    }
+
     public List<String> formatStringToPhoneNumbers(String phoneNumbers) {
         if (phoneNumbers == null || phoneNumbers.isEmpty()) {
             return new ArrayList<>();
@@ -186,4 +199,33 @@ public class EmployeeService {
             formattedPhoneNumbers.add(phoneNumber.trim());
         }
         return formattedPhoneNumbers;    }
+
+    public String parseThymeleafTemplate(Employee employeeDetails, Company company) {
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setPrefix("templates/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+
+        Context context = new Context();
+        context.setVariable("employeeDetails", employeeDetails);
+        context.setVariable("company", company);
+        context.setVariable("age", calculateAge(employeeDetails.getBirthdate()));
+
+        return templateEngine.process("employee-details", context);
+    }
+
+    public void generatePdfFromHtml(Employee employee, String html) throws IOException, DocumentException {
+        String outputFolder = System.getProperty("user.home") + File.separator + employee.getSerialNumber()+".pdf";
+        OutputStream outputStream = new FileOutputStream(outputFolder);
+
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocumentFromString(html);
+        renderer.layout();
+        renderer.createPDF(outputStream);
+
+        outputStream.close();
+    }
 }
